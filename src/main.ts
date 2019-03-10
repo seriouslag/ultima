@@ -4,6 +4,9 @@ import router from './router';
 import store from './store';
 import './registerServiceWorker';
 
+import 'bulma/css/bulma.css';
+import './styles/index.scss';
+
 Vue.config.productionTip = false;
 
 new Vue({
