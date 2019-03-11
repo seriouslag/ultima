@@ -54,7 +54,6 @@ export default class InstagramFeed extends Vue {
   private async fetchFeed() {
     const options: RequestInit = {
       method: 'GET',
-      headers: { 'Content-Type': '' },
     };
 
     try {
