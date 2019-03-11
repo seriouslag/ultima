@@ -39,10 +39,8 @@ export default class Intro extends Vue {
 
 .intro {
   display: flex;
-  flex: 1;
   overflow: hidden;
-  position: relative;
-  height: 100vh;
+  height: 100vh; // Seems to force the container to recalc size on resizing
   
   .background {
     position: absolute;
@@ -51,7 +49,7 @@ export default class Intro extends Vue {
     bottom: 0;
     right: 0;
     left: 0;
-    background: #151515  url("../assets/Colorful_galaxy.jpg") no-repeat center bottom;
+    background: #151515  url("../assets/Colorful_galaxy.jpg") no-repeat;
     background-size: cover;
 
   }

@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <Intro />
-    <About />
+    <intro />
+    <about />
+    <mailing-list />
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Intro from '@/components/Intro.vue'; // @ is an alias to /src
 import About from '@/components/About.vue';
+import MailingList from '@/components/MailingList.vue';
 
 @Component({
   components: {
     Intro,
     About,
+    MailingList,
   },
 })
 export default class Home extends Vue {}

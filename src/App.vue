@@ -3,8 +3,23 @@
     <div>
       <router-view/>
     </div>
+    <the-footer />
   </div>
 </template>
+
+<script type="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+import TheFooter from '@/components/TheFooter.vue';
+
+@Component({
+  components: {
+    TheFooter,
+  },
+})
+export default class App extends Vue {
+}
+</script>
 
 <style lang="scss" scoped>
 #app {
@@ -16,6 +31,7 @@
   min-height: 100%;
   min-width: 100%;
   display: flex;
+  flex-direction: column;
   
   div {
     flex: 1;

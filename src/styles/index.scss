@@ -1,6 +1,4 @@
-@import "./fonts";
-
-.ultima {
+  .ultima {
   font-family: 'SFAlienEncounters';
   background: -webkit-linear-gradient(rgb(241, 212, 245), rgb(162, 83, 135));
   -webkit-background-clip: text;
@@ -8,4 +6,11 @@
   -webkit-text-fill-color: transparent;
   font-size: 5em; 
   font-size: 20vw;
+}
+
+input {
+  &:active, &:focus {
+    border: 1px solid #a25387;
+    box-shadow: 0 0 0 0.125em rgba(162, 83, 135, 0.25)
+  }
 }

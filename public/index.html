@@ -4,26 +4,107 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="preload"
+      href="/fonts/SFAlienEncounters.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>ultima</title>
     <style>
+      @font-face {
+        font-family: "SFAlienEncounters";
+        src: url("fonts/SFAlienEncounters.ttf") format("truetype");
+      }
+      
+
       html,
-      body {
+      body, #app {
         height: 100%;
         width: 100%;
         padding: 0;
         margin: 0;
         overflow: hidden;
         overflow-y: auto !important;
-
       }
+
+      
     </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but ultima doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <style>
+        #app {
+          height: 100%;
+        }
+        .loading {
+          display: flex;
+          align-content: center;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          background: #151515;
+        }
+
+        .loading h1 {
+          max-width: 75vw;
+        }
+
+         .loading h1 > div {
+          animation: moveIndeterminate 3s infinite;
+          overflow: hidden;
+        }
+
+        .loading h1 div div {
+          width: 75vw;
+        }
+
+        @keyframes moveIndeterminate {
+          0% {
+            max-width: 0%;
+          }
+
+          100% {
+            max-width: 100%;
+          }
+        }
+      </style>
+      <div class="loading">
+        <h1>
+          <div>
+            <div>
+              <svg viewBox="0 0 59 18">
+                <defs>
+                  <linearGradient id="ultima"
+                    x1="0"
+                    x2="0"
+                    y1="0"
+                    y2="100%"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#f1d4f5"
+                      offset="0%" />
+                    <stop stop-color="#a25387"
+                      offset="100%" />
+                    </linearGradient>
+                  </defs>
+                  <text fill="url(#ultima)"
+                    style="font-family: 'SFAlienEncounters';"
+                    x="0"
+                    y="15"
+                    class="b"
+                  >
+                    ULTIMA
+                  </text>
+                </svg>
+              </div>
+            </div>
+          </h1>
+        </div>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
