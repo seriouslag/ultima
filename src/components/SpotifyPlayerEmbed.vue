@@ -8,6 +8,10 @@
   .spotifyPlayerEmbed {
     min-height: 250px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+
+    iframe {
+      min-height: 250px;
+    }
   }
 </style>

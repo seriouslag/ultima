@@ -52,8 +52,13 @@ export default class InstagramFeed extends Vue {
   }
 
   private async fetchFeed() {
+    const options: RequestInit = {
+      method: 'GET',
+      headers: { 'Content-Type': '' },
+    };
+
     try {
-      const resposne = await fetch(`${this.instaUrl}${this.instaQuery}`);
+      const resposne = await fetch(`${this.instaUrl}${this.instaQuery}`, options);
       const instagram = await resposne.json() as Instagram;
       this.feed = instagram.data;
     } catch (e) {
