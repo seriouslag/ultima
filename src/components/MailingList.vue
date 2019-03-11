@@ -1,7 +1,7 @@
 <template>
 <div class="section mailing-list">
   <!-- Begin Mailchimp Signup Form -->
-  <div id="mc_embed_signup">
+  <div class="form-container">
     <form
       :action="`https://band.us20.list-manage.com/subscribe/post?u=48a094c6108f02aa701cddbb4&amp;id=18b794c854`"
       method="post"
@@ -49,15 +49,14 @@ export default class MailingList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.flex-form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-}
 
 .mailing-list {
   background-color: whitesmoke;
+
+  .form-container {
+    max-width: 1200px;
+    margin: auto;
+  }
 }
 
 .columns {

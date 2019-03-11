@@ -8,7 +8,7 @@
   font-size: 20vw;
 }
 
-input {
+input, .input {
   &:active, &:focus {
     border: 1px solid #a25387;
     box-shadow: 0 0 0 0.125em rgba(162, 83, 135, 0.25)
