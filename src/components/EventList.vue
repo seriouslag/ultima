@@ -1,30 +1,32 @@
 <template>
 <div class="eventList">
   <h3>Upcoming events</h3>
-  <article class="media" v-for="(event, i) in events" :key="i">
-    <figure class="media-left">
-      <p class="image is-128px">
-        <img :src="event.image">
-      </p>
-      <div class="event-link" v-if="event.where.url">
-        <a class="link is-info" :href="event.where.url">Link</a>
-      </div>
-    </figure>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>{{ event.name }}</strong> <small> @ {{event.when.toMillis() | toDate}}</small>
-          <br>
-          {{event.note}}
+  <div>
+    <article class="media" v-for="(event, i) in events" :key="i">
+      <figure class="media-left">
+        <p class="image is-128px">
+          <img :src="event.image">
         </p>
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          {{ event.where.name }}
+        <div class="event-link" v-if="event.where.url">
+          <a class="link is-info" :href="event.where.url">Link</a>
         </div>
-      </nav>
-    </div>
-  </article>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{ event.name }}</strong> <small> @ {{event.when.toMillis() | toDate}}</small>
+            <br>
+            {{event.note}}
+          </p>
+        </div>
+        <div class="level is-mobile">
+          <div class="level-left">
+            {{ event.where.name }}
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
 </div>
 </template>
 
@@ -42,7 +44,7 @@ export default class EventList extends Vue {
     today.setSeconds(0);
     this.$firestore.collection('events')
         .where('when', '>', today)
-        .orderBy('when', 'desc')
+        .orderBy('when', 'asc')
         .limit(5)
         .onSnapshot((querySnapshot) => this.handleSnapshot(querySnapshot));
   }
@@ -56,9 +58,32 @@ export default class EventList extends Vue {
 <style lang="scss" scoped>
 .eventList {
   max-width: 500px;
+  div {
+    article:nth-child(even) {
+      background: whitesmoke
+    }
 
-  h3 {
-    padding-bottom: 1em;
+    .media {
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center
+      }
+      .media-content {
+        overflow: visible;
+
+        div {
+          @media screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    h3 {
+      padding-bottom: 1em;
+    }
   }
 }
 
@@ -69,6 +94,7 @@ export default class EventList extends Vue {
 
 .event-link {
   display: flex;
+  width:100%;
 
   a {
     padding: 5px;
