@@ -59,8 +59,12 @@ export default class EventList extends Vue {
 .eventList {
   max-width: 500px;
   div {
-    article:nth-child(even) {
-      background: whitesmoke
+    article {
+      padding: 1em;
+
+      &:nth-child(even) {
+        background: whitesmoke
+      }
     }
 
     .media {
