@@ -14,3 +14,15 @@ input, .input {
     box-shadow: 0 0 0 0.125em rgba(162, 83, 135, 0.25)
   }
 }
+
+a {
+  color: #a25387;
+
+  &:visited {
+    color: #a25387;
+  }
+
+  &:hover, &:active {
+    color: #234099;
+  }
+}
