@@ -1,5 +1,6 @@
 <template>
 <div class="instagram-feed">
+  <h2 v-if="this.feed.length">Latest updates</h2>
   <div class="columns is-multiline is-centered">
     <div class="column" v-for="data in feed" :key="data.id">
       <a href="https://www.instagram.com/ultimasynthwave/">
@@ -33,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
 import { Instagram, InstagramData } from '@/models/response/Instagram';
 
@@ -63,6 +64,13 @@ export default class InstagramFeed extends Vue {
     } catch (e) {
       this.feed = [];
     }
+
+    this.emitShow();
+  }
+
+  @Emit('show')
+  private emitShow() {
+    return !!this.feed.length;
   }
 }
 </script>

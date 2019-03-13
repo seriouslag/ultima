@@ -8,9 +8,8 @@
         <event-list />
       </div>
     </div>
-    <div class="column">
-      <h2>Latest updates</h2>
-      <instagram-feed />
+    <div class="column" v-show="showRightColumn">
+      <instagram-feed v-show="showRightColumn" @show="handleShowRightColumn" />
     </div>
   </div>
 </section>
@@ -33,6 +32,13 @@ import EventList from '@/components/EventList.vue';
   },
 })
 export default class About extends Vue {
+  private showRightColumn = false;
+
+  private handleShowRightColumn(value: boolean) {
+    if (!value) { return; }
+
+    this.showRightColumn = true;
+  }
 }
 </script>
 
