@@ -17,6 +17,7 @@
           name="email"
           placeholder="Email"
           aria-autocomplete="email username"
+          autocomplete="email username"
         >
         <span
           class="icon is-small is-left"
@@ -44,6 +45,7 @@
           name="password"
           placeholder="Password"
           aria-autocomplete="current-password"
+          autocomplete="current-password"
         >
         <span
           class="icon is-small is-left"

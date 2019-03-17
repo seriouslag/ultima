@@ -182,6 +182,7 @@ export default class EventForm extends Vue {
       name: '',
       image: '',
       when: new Date(),
+      note: '',
       where: {
           name: '',
           url: '',
