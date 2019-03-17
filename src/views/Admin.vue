@@ -12,6 +12,7 @@
         slot="start"
         class="navbar-item"
         :to="{ name: 'admin' }"
+        v-if="user"
       >
         Admin
       </router-link>
@@ -19,6 +20,7 @@
         slot="start"
         class="navbar-item"
         :to="{ name: 'adminEvents' }"
+        v-if="user"
       >
         Event
       </router-link>
