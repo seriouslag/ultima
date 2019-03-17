@@ -34,20 +34,25 @@ const routes = [
         meta: {
           admin: true,
         },
-        component: () => import(/* webpackChunkName: "adminEvents" */ './views/Events.vue'),
+        component: () => import(/* webpackChunkName: "events" */ './views/Events.vue'),
         children: [
           {
             name: 'adminEvents',
             path: '/',
-            component: () => import(/* webpackChunkName: "adminEvents" */ './views/EventsHome.vue'),
+            component: () => import(/* webpackChunkName: "eventsHome" */ './views/EventsHome.vue'),
             meta: {
               admin: true,
             },
           },
           {
+            name: 'newEvent',
+            path: 'new',
+            component: () => import(/* webpackChunkName: "eventNew" */ './views/EventNew.vue'),
+          },
+          {
             name: 'editEvent',
-            path: ':id',
-            component: () => import(/* webpackChunkName: "adminEvents" */ './views/EventEdit.vue'),
+            path: 'edit/:id',
+            component: () => import(/* webpackChunkName: "eventEdit" */ './views/EventEdit.vue'),
             meta: {
               admin: true,
             },

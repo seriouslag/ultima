@@ -24,23 +24,20 @@
       </router-link>
       <signout slot="end" v-if="user"/>
     </navbar>
-    <div class="section columns">
-      <div class="column">
+    <div class="section">
         <router-view />
-      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { Component, Vue } from 'vue-property-decorator';
 
 import Navbar from '@/components/Navbar.vue';
 import Login from '@/components/admin/Login.vue';
 import Signout from '@/components/admin/Signout.vue';
-
-import firebase from 'firebase/app';
-import 'firebase/auth';
 
 @Component({
   components: {

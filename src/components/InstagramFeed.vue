@@ -1,6 +1,6 @@
 <template>
 <div class="instagram-feed">
-  <h2 v-if="this.feed.length">Latest updates</h2>
+  <h2 v-if="this.feed.length" class="title">Latest updates</h2>
   <div class="columns is-multiline is-centered">
     <div class="column" v-for="data in feed" :key="data.id">
       <a href="https://www.instagram.com/ultimasynthwave/">

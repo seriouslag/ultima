@@ -1,6 +1,6 @@
 <template>
 <div class="eventList">
-  <h3>Upcoming events</h3>
+  <h3 class="title">Upcoming events</h3>
   <div>
     <event v-for="(event, i) in events" :key="i" :event="event" />
   </div>
