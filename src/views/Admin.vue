@@ -24,6 +24,14 @@
       >
         Event
       </router-link>
+      <router-link
+        slot="start"
+        class="navbar-item"
+        :to="{ name: 'login' }"
+        v-if="!user"
+      >
+        Login
+      </router-link>
       <signout slot="end" v-if="user"/>
     </navbar>
     <div class="section">
