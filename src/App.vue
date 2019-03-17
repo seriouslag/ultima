@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script type="ts">
+<script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 import TheFooter from '@/components/TheFooter.vue';
