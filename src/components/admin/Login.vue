@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
 import firebase from 'firebase/app';
 
@@ -91,9 +91,15 @@ export default class Login extends Vue {
     this.error = '';
     try {
       const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+      this.emitLogin();
     } catch (e) {
       this.error = JSON.parse(JSON.stringify(e)).message;
     }
+  }
+
+  @Emit('login')
+  private emitLogin() {
+    return;
   }
 }
 </script>

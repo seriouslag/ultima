@@ -16,6 +16,7 @@ import firebase from 'firebase/app';
 export default class Signout extends Vue {
   private signout(): void {
     firebase.auth().signOut();
+    this.$router.push({ name: 'login' });
   }
 }
 </script>

@@ -26,8 +26,10 @@ export default class LoginView extends Vue {
       const redirect = this.$route.query.redirect;
       if (redirect) {
         this.$router.push({ path: String(redirect) });
+        return;
       }
     }
+    this.$router.push({ name: 'admin' });
   }
 
   get user() {
