@@ -29,7 +29,7 @@
             slot="header"
             v-if="event"
           >
-              Detele event: {{ event.name }}
+              Delete event: {{ event.name || event.id }}
           </span>
           <p>
               Are you sure you want to delete this event?

@@ -36,7 +36,7 @@
             slot="header"
             v-if="selectedEventIndex >= 0"
           >
-              Delete event: {{ events[selectedEventIndex].name }}
+              Delete event: {{ events[selectedEventIndex].name || events[selectedEventIndex].id }}
           </span>
           <p>
               Are you sure you want to delete this event?
