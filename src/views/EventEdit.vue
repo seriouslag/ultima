@@ -5,7 +5,7 @@
         v-if="event" 
         :event="event"
         @submit="updateEvent"
-        @validationChanged="isInvalid = value"
+        @validationChanged="handleValidationChange"
     >
       <button
         slot="buttons"
@@ -130,6 +130,10 @@ export default class EventEdit extends Vue {
 
       this.deleteModal = false;
     }
+  }
+
+  private handleValidationChange(value: boolean) {
+    this.isInvalid = value;
   }
 }
 </script>

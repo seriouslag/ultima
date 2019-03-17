@@ -4,6 +4,7 @@
         <event-form
             :event="null"
             @submit="createEvent"
+            @validationChanged="handleValidationChange"
         />
     </div>
 </template>
@@ -21,20 +22,28 @@ import { Event } from '../models/Event';
 })
 export default class EventNew extends Vue {
 
+    private isInvalid = true;
+
     private async createEvent(event: Event) {
-        try {
-            const response = await this.$firestore.collection('events')
-                .add({
-                    name: event.name,
-                    image: event.image,
-                    note: event.note,
-                    when: new   Date(event.when),
-                    where: event.where,
-                });
-            this.$router.push({ name: 'adminEvents' });
-        } catch (e) {
-            console.log('Failed to create new event');
+        if (!this.isInvalid) {
+            try {
+                const response = await this.$firestore.collection('events')
+                    .add({
+                        name: event.name,
+                        image: event.image,
+                        note: event.note,
+                        when: new   Date(event.when),
+                        where: event.where,
+                    });
+                this.$router.push({ name: 'adminEvents' });
+            } catch (e) {
+                console.log('Failed to create new event');
+            }
         }
+    }
+
+    private handleValidationChange(value: boolean) {
+        this.isInvalid = value;
     }
 }
 </script>

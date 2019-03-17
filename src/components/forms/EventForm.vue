@@ -30,7 +30,7 @@
                 <div class="control">
                     <input
                         class="input"
-                        type="text"
+                        type="url"
                         placeholder="Url of image for event"
                         v-model="localEvent.image"
                         name="imageUrl"
@@ -201,13 +201,15 @@ export default class EventForm extends Vue {
   }
 
   @Emit('submit')
-  private emitSubmit() {
-      this.$validator.validate();
-      const obj = { ...this.localEvent, when: new Date(`${this.date} ${this.time}`) };
-      return obj;
+  private async emitSubmit() {
+      await this.$validator.validate();
+      if (!this.isInvalid) {
+        const obj = { ...this.localEvent, when: new Date(`${this.date} ${this.time}`) };
+        return obj;
+      }
   }
 
-  @Emit('isInvalid')
+  @Emit('validationChanged')
   private emitIsInvalid(value: boolean) {
       return value;
   }
