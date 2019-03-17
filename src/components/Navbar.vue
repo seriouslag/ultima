@@ -72,6 +72,9 @@ export default class Navbar extends Vue {
   }
 
   .navbar-burger {
+
+    height: initial;
+    
     > div {
       justify-content: center;
       align-items: center;

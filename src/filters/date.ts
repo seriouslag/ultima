@@ -13,10 +13,10 @@ const dateFilter = (value: any) => {
   if (hours > 11) {
     meridian = 'pm';
     hours -= 12;
-  } else {
-    if (!hours) {
-      hours = 12;
-    }
+  }
+
+  if (!hours) {
+    hours = 12;
   }
 
   if (hours < 10) {

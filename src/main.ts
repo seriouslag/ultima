@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import 'whatwg-fetch';
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
+import { router } from './router';
 import store from './store';
 // import './registerServiceWorker';
 import 'bulma/css/bulma.css';

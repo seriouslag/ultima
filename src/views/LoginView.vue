@@ -21,6 +21,15 @@ import firebase from 'firebase/app';
 })
 export default class LoginView extends Vue {
 
+  private handleLogin() {
+    if (this.$route.query && this.$route.query.redirect) {
+      const redirect = this.$route.query.redirect;
+      if (redirect) {
+        this.$router.push({ path: String(redirect) });
+      }
+    }
+  }
+
   get user() {
     return this.$store.getters.user;
   }
