@@ -2,38 +2,20 @@
 <div class="eventList">
   <h3>Upcoming events</h3>
   <div>
-    <article class="media" v-for="(event, i) in events" :key="i">
-      <figure class="media-left">
-        <p class="image is-128px">
-          <img :src="event.image">
-        </p>
-        <div class="event-link" v-if="event.where.url">
-          <a class="link is-info" :href="event.where.url">Link</a>
-        </div>
-      </figure>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>{{ event.name }}</strong> <small> @ {{event.when.toMillis() | toDate}}</small>
-            <br>
-            {{event.note}}
-          </p>
-        </div>
-        <div class="level is-mobile">
-          <div class="level-left">
-            {{ event.where.name }}
-          </div>
-        </div>
-      </div>
-    </article>
+    <event v-for="(event, i) in events" :key="i" :event="event" />
   </div>
 </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Event from '@/components/Event.vue';
 
-@Component
+@Component({
+  components: {
+    Event,
+  },
+})
 export default class EventList extends Vue {
   private events: firebase.firestore.DocumentData[] = [];
 

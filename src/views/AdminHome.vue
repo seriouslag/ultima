@@ -1,5 +1,5 @@
 <template>
-    <router-view />
+    <h2>Admin home</h2>
 </template>
 
 <script lang="ts">
