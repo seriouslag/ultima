@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import Event from '@/components/Event.vue';
 
 @Component({
@@ -33,6 +33,15 @@ export default class EventList extends Vue {
 
   private handleSnapshot(docs: firebase.firestore.QuerySnapshot) {
     this.events = docs.docs.map((doc) => doc.data());
+
+    if (this.events.length) {
+      this.emitShow();
+    }
+  }
+
+  @Emit('show')
+  private emitShow() {
+    return !!this.events.length;
   }
 }
 </script>

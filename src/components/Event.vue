@@ -12,7 +12,7 @@
       <div class="content">
         <p>
           <strong>{{ event.name }}</strong>
-          <small>@ {{event.when.toMillis() | toDate}}</small>
+          <small> @ {{event.when.toMillis() | toDate}}</small>
           <br>
           {{event.note}}
         </p>
@@ -39,6 +39,10 @@ export default class Event extends Vue {
 </script>
 
 <style lang="scss" scoped>
+small {
+  white-space: nowrap;
+}
+
 .media {
   @media screen and (max-width: 768px) {
     flex-direction: column;

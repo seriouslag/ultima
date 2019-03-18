@@ -5,7 +5,7 @@
       <spotify-embed />
       <spotify-player-embed />
       <div class="section">
-        <event-list />
+        <event-list v-show="showEvents" @show="showEvents = true" />
       </div>
     </div>
     <div class="column" v-show="showRightColumn">
@@ -33,6 +33,7 @@ import EventList from '@/components/EventList.vue';
 })
 export default class About extends Vue {
   private showRightColumn = false;
+  private showEvents = false;
 
   private handleShowRightColumn(value: boolean) {
     if (!value) { return; }
