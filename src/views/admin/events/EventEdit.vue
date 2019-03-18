@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import EventForm from '../components/forms/EventForm.vue';
-import ConfirmModal from '../components/modals/ConfirmModal.vue';
+import EventForm from '@/components/forms/EventForm.vue';
+import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 
 @Component({
     components: {

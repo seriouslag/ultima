@@ -12,7 +12,7 @@
         slot="start"
         class="navbar-item"
         :to="{ name: 'admin' }"
-        v-if="user"
+        v-if="isAdmin"
       >
         Admin
       </router-link>
@@ -20,7 +20,7 @@
         slot="start"
         class="navbar-item"
         :to="{ name: 'adminEvents' }"
-        v-if="user"
+        v-if="isAdmin"
       >
         Event
       </router-link>
@@ -43,7 +43,7 @@
 <script lang="ts">
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 import Navbar from '@/components/Navbar.vue';
 import Login from '@/components/admin/Login.vue';
@@ -81,6 +81,8 @@ export default class Admin extends Vue {
 
   private async getCurrentUserDocument() {
     if (!this.user) {
+      this.$store.dispatch('setRole', null);
+      this.$router.push({ name: 'login' });
       return null;
     }
 
@@ -104,8 +106,31 @@ export default class Admin extends Vue {
         return;
       }
     }
-    firebase.auth().signOut();
     this.$store.dispatch('setRole', null);
+  }
+
+  get role() {
+    return this.$store.getters.role;
+  }
+
+  get isAdmin() {
+    if (this.role) {
+      return this.role.toLowerCase() === 'admin';
+    }
+    return false;
+  }
+
+  @Watch('isAdmin')
+  private roleWatcher(isAdmin: boolean) {
+    if (!isAdmin && this.user) {
+      this.$router.replace({ name: 'unauthorized' });
+      return;
+    }
+
+    if (this.$route.name === 'unauthorized' && this.user) {
+      this.$router.push({ name: 'admin' });
+      return;
+    }
   }
 }
 </script>

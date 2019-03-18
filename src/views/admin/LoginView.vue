@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 class="title is-3">Login</h3>
     <login @login="handleLogin" v-if="!user" />
     <signout v-else />
   </div>
@@ -39,5 +40,9 @@ export default class LoginView extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

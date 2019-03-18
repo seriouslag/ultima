@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import EventForm from '../components/forms/EventForm.vue';
+import EventForm from '@/components/forms/EventForm.vue';
 
-import { Event } from '../models/Event';
+import { Event } from '@/models/Event';
 
 @Component({
     components: {
