@@ -163,7 +163,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
-import Datepicker from 'vue-bulma-datepicker';
+import Datepicker from '@/components/datepicker/index.vue';
 
 import { Event } from '../../models/Event';
 
