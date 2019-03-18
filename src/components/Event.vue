@@ -47,6 +47,7 @@ small {
 }
 
 .media {
+  flex: 1 0 0%;
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;

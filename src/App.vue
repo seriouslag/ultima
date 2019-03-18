@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <div>
-      <router-view/>
+      <div>
+        <router-view/>
+      </div>
+     
     </div>
-    <the-footer />
+     <the-footer />
   </div>
 </template>
 
@@ -30,12 +33,25 @@ export default class App extends Vue {
   min-height: 100%;
   min-width: 100%;
   flex-direction: column;
-  display: block;
-  
+  display: flex;
+
   div {
-    display: block;
-    flex: 1;
+    
+    flex: 1 0 0%;
+  }
+  
+  > div {
+    // display: flex;
+    flex-direction: column;
+    flex: 1 0 0%;
     flex-basis: auto;
+    display: -webkit-flex; 
+
+    > div {
+      // display: flex;
+      flex-direction: row;
+      flex: 1 0 0%;
+    }
   }
 }
 #nav {

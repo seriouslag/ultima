@@ -48,7 +48,6 @@ export default class EventList extends Vue {
 
 <style lang="scss" scoped>
 .eventList {
-  max-width: 500px;
   div {
     article {
       padding: 1em;
