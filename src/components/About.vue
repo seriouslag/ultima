@@ -46,6 +46,7 @@ export default class About extends Vue {
 .about {
   background: white;
   margin-bottom: 0 !important;
+  margin-top: 0 !important;
 
   .columns {
     .column {
