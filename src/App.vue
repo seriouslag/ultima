@@ -30,9 +30,10 @@ export default class App extends Vue {
   min-height: 100%;
   min-width: 100%;
   flex-direction: column;
-  display: flex;
+  display: block;
   
   div {
+    display: block;
     flex: 1;
     flex-basis: auto;
   }

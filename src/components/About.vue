@@ -1,6 +1,5 @@
 <template>
-<section class="about section">
-  <div class="columns">
+<section class="about section columns">
     <div class="column">
       <spotify-embed />
       <spotify-player-embed />
@@ -11,7 +10,6 @@
     <div class="column" v-show="showRightColumn">
       <instagram-feed v-show="showRightColumn" @show="handleShowRightColumn" />
     </div>
-  </div>
 </section>
 </template>
 
@@ -47,6 +45,7 @@ export default class About extends Vue {
 
 .about {
   background: white;
+  margin-bottom: 0 !important;
 
   .columns {
     .column {

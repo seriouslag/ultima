@@ -10,12 +10,15 @@
     </figure>
     <div class="media-content">
       <div class="content">
-        <p>
+        <div>
           <strong>{{ event.name }}</strong>
-          <small> @ {{event.when.toMillis() | toDate}}</small>
           <br>
-          {{event.note}}
-        </p>
+          <small>{{event.when.toMillis() | toDate}}</small>
+          <br>
+          <p>
+            {{event.note}}
+          </p>
+        </div>
       </div>
       <div class="level is-mobile">
         <div class="level-left">{{ event.where.name }}</div>
@@ -50,6 +53,7 @@ small {
   }
   .media-content {
     overflow: visible;
+    max-width: 100%;
 
     div {
       @media screen and (max-width: 768px) {
