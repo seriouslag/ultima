@@ -11,6 +11,7 @@
         <form
             @submit.prevent="emitSubmit"
         >
+            <image-upload />
             <div class="field">
                 <div class="control">
                     <input
@@ -163,13 +164,15 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
+import ImageUpload from '@/components/ImageUpload.vue';
 import Datepicker from '@/components/datepicker/index.vue';
 
-import { Event } from '../../models/Event';
+import { Event } from '@/models/Event';
 
 @Component({
     components: {
         Datepicker,
+        ImageUpload,
     },
 })
 export default class EventForm extends Vue {
@@ -219,6 +222,5 @@ export default class EventForm extends Vue {
       this.emitIsInvalid(isInvald);
       return isInvald;
   }
-
 }
 </script>

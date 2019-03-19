@@ -55,7 +55,7 @@
 <script lang="ts">
 import firebase from 'firebase/app';
 import { Component, Vue } from 'vue-property-decorator';
-import Event from '@/components/Event.vue';
+import Event from '@/components/events/Event.vue';
 import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 
 @Component({

@@ -3,6 +3,13 @@
 </div>
 </template>
 
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component
+export default class Overlay extends Vue {}
+</script>
+
 <style lang="scss" scoped>
   .overlay {
     z-index: -1;

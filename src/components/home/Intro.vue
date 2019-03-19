@@ -22,8 +22,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import Overlay from '@/components/Overlay.vue';
-import SocialLinks from '@/components/SocialLinks.vue';
+import Overlay from '@/components/home/Overlay.vue';
+import SocialLinks from '@/components/home/SocialLinks.vue';
 
 @Component({
   components: {
@@ -49,9 +49,8 @@ export default class Intro extends Vue {
     bottom: 0;
     right: 0;
     left: 0;
-    background: #151515  url("../assets/Colorful_galaxy.jpg") no-repeat;
+    background: #151515  url("/assets/Colorful_galaxy.jpg") no-repeat;
     background-size: cover;
-
   }
 
   .wrapper {

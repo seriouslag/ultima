@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Event as EventModel } from '../models/Event';
+import { Event as EventModel } from '@/models/Event';
 
 @Component
 export default class Event extends Vue {

@@ -82,7 +82,9 @@ export default class Admin extends Vue {
   private async getCurrentUserDocument() {
     if (!this.user) {
       this.$store.dispatch('setRole', null);
-      this.$router.push({ name: 'login' });
+      if (this.$route.name !== 'login') {
+        this.$router.push({ name: 'login' });
+      }
       return null;
     }
 

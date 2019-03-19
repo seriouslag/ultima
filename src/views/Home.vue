@@ -8,9 +8,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Intro from '@/components/Intro.vue'; // @ is an alias to /src
-import About from '@/components/About.vue';
-import MailingList from '@/components/MailingList.vue';
+import Intro from '@/components/home/Intro.vue';
+import About from '@/components/home/About.vue';
+import MailingList from '@/components/forms/MailingList.vue';
 
 @Component({
   components: {

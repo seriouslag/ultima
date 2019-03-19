@@ -16,10 +16,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import SpotifyEmbed from '@/components/SpotifyEmbed.vue';
-import SpotifyPlayerEmbed from '@/components/SpotifyPlayerEmbed.vue';
+import SpotifyEmbed from '@/components/spotify/SpotifyEmbed.vue';
+import SpotifyPlayerEmbed from '@/components/spotify/SpotifyPlayerEmbed.vue';
 import InstagramFeed from '@/components/InstagramFeed.vue';
-import EventList from '@/components/EventList.vue';
+import EventList from '@/components/events/EventList.vue';
 
 @Component({
   components: {

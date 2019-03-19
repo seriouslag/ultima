@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import Event from '@/components/Event.vue';
+import Event from '@/components/events/Event.vue';
 
 @Component({
   components: {
