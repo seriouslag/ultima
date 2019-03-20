@@ -1,5 +1,5 @@
-import https from 'https';
-import dotenv from 'dotenv';
+import * as https from 'https';
+import * as dotenv from 'dotenv';
 
 import 'colors';
 
