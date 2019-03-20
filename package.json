@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "deploy": "yarn build && firebase deploy",
-    "purge": "node ./utils/purgeCache.js"
+    "purge": "node ./utils/purgeCache.ts"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
