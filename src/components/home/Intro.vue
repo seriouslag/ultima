@@ -49,7 +49,7 @@ export default class Intro extends Vue {
     bottom: 0;
     right: 0;
     left: 0;
-    background: #151515  url("/assets/Colorful_galaxy.jpg") no-repeat;
+    background: #151515  url("../../assets/Colorful_galaxy.jpg") no-repeat;
     background-size: cover;
   }
 
