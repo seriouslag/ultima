@@ -27,7 +27,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
-import PictureUpload from 'vue-picture-input';
+import PictureUpload from '@/components/PictureInput/PictureInput.vue';
 
 @Component({
     components: {
@@ -38,7 +38,7 @@ export default class ImageUpload extends Vue {
     private storage = firebase.storage();
 
     private hasImage = false;
-    private file = '';
+    private file: string = '';
 
     private dropzoneOptions = {
         thumbnailWidth: 150,
@@ -48,7 +48,7 @@ export default class ImageUpload extends Vue {
         autoProcessQueue: false,
     };
 
-    private onChanged(file) {
+    private onChanged(file: string) {
         if (file) {
             this.hasImage = true;
             this.file = file;
@@ -56,11 +56,11 @@ export default class ImageUpload extends Vue {
             this.hasImage = false;
             this.file = '';
         }
-      }
+    }
 
-      private onRemoved() {
-          this.hasImage = false;
-      }
+    private onRemoved() {
+        this.hasImage = false;
+    }
 
 }
 </script>

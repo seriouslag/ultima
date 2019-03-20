@@ -1,7 +1,9 @@
-const https = require('https');
+import https from 'https';
+import dotenv from 'dotenv';
 
-require('colors');
-require('dotenv').config();
+import 'colors';
+
+dotenv.config();
 
 let error = false;
 let errorMessage = '';
@@ -11,12 +13,12 @@ const domains = [
     url: 'ultima.band',
     id: 'e1890014faef5bf228cf5fcb4a7088c8',
   },
-]
+];
 
 const apiKey = process.env.CLOUDFLARE_API_KEY;
 const apiEmail = process.env.CLOUDFLARE_API_EMAIL;
 
-console.log('Clearing Cloudflare cache...'.yellow)
+console.log('Clearing Cloudflare cache...'.yellow);
 
 if (!domains.length) {
   const message = 'No domains were supplied; ';
@@ -47,7 +49,7 @@ domains.forEach((domain) => {
   const { url, id} = domain;
 
   const data = JSON.stringify({
-    "purge_everything": true
+    purge_everything: true,
   });
 
   const options = {
@@ -59,14 +61,14 @@ domains.forEach((domain) => {
       'X-Auth-Email': `${apiEmail}`,
       'X-Auth-Key': `${apiKey}`,
       'Content-Type': 'application/json',
-      'Content-Length': data.length
-    }
+      'Content-Length': data.length,
+    },
   };
 
   const req = https.request(options, (res) => {
     res.on('data', (d) => {
       const statusCode = res.statusCode;
-      console.log(`statusCode: ${statusCode}`)
+      console.log(`statusCode: ${statusCode}`);
       if (statusCode >= 200 && statusCode < 300) {
         console.log(`Purged cloudflare cache for ${url}!`.green);
       } else {
@@ -78,7 +80,7 @@ domains.forEach((domain) => {
 
   req.on('error', (e) => {
     console.log('Failed to purge cloudflare cache!'.red, e);
-  })
+  });
 
   req.write(data);
   req.end();
