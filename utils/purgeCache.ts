@@ -69,7 +69,7 @@ domains.forEach((domain) => {
     res.on('data', (d) => {
       const statusCode = res.statusCode;
       console.log(`statusCode: ${statusCode}`);
-      if (statusCode >= 200 && statusCode < 300) {
+      if (statusCode && statusCode >= 200 && statusCode < 300) {
         console.log(`Purged cloudflare cache for ${url}!`.green);
       } else {
         const response = JSON.parse(String.fromCharCode.apply(null, d));
