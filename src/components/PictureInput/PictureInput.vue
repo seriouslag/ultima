@@ -411,15 +411,6 @@ export default {
       const canvas = this.$refs.previewCanvas;
 
       if (this.rotate) {
-        this.context.translate(
-          offsetX * this.pixelRatio,
-          offsetY * this.pixelRatio
-        );
-        this.context.translate(
-          (scaledWidth / 2) * this.pixelRatio,
-          (scaledHeight / 2) * this.pixelRatio
-        );
-        this.context.rotate(this.rotate);
         offsetX = -scaledWidth / 2;
         offsetY = -scaledHeight / 2;
       }
@@ -427,11 +418,19 @@ export default {
       this.context.beginPath();
       this.context.lineWidth = "6";
       this.context.strokeStyle = "red";
-      this.context.rect(
-        offsetX * this.pixelRatio,
-        offsetY * this.pixelRatio,
-        scaledWidth * this.pixelRatio,
-        scaledHeight * this.pixelRatio); 
+      if(scaledHeight <= scaledWidth) {
+        this.context.rect(
+          offsetX * this.pixelRatio,
+          offsetY * this.pixelRatio,
+          scaledHeight * this.pixelRatio,
+          scaledHeight * this.pixelRatio);
+      } else {
+        this.context.rect(
+          offsetX * this.pixelRatio,
+          offsetY * this.pixelRatio,
+          scaledWidth * this.pixelRatio,
+          scaledWidth * this.pixelRatio);
+      }
       this.context.stroke();
     },
     drawImage(image) {
