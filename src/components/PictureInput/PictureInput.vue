@@ -17,7 +17,6 @@
           @dragend.stop.prevent="onDragStop"
           @dragleave.stop.prevent="onDragStop"
           @drop.stop.prevent="onFileDrop"
-          @click.prevent="onClick"
           :style="{height: previewHeight + 'px', zIndex: zIndex + 1 }"
         ></canvas>
         <div
@@ -30,7 +29,6 @@
         </div>
       </div>
       <button
-        v-if="imageSelected && !hideChangeButton"
         @click.prevent="selectImage"
         :class="buttonClass"
       >{{ strings.change }}</button>
@@ -84,23 +82,23 @@ export default {
   props: {
     width: {
       type: [String, Number],
-      default: Number.MAX_SAFE_INTEGER
+      default: Number.MAX_SAFE_INTEGER,
     },
     height: {
       type: [String, Number],
-      default: Number.MAX_SAFE_INTEGER
+      default: Number.MAX_SAFE_INTEGER,
     },
     margin: {
       type: [String, Number],
-      default: 0
+      default: 0,
     },
     accept: {
       type: String,
-      default: "image/*"
+      default: "image/*",
     },
     size: {
       type: [String, Number],
-      default: Number.MAX_SAFE_INTEGER
+      default: Number.MAX_SAFE_INTEGER,
     },
     name: {
       type: String,
@@ -377,11 +375,64 @@ export default {
               }
             }
             this.drawImage(this.imageObject);
+            this.drawOverlay(this.imageObject);
           };
           this.imageObject.src = this.image;
         };
         reader.readAsDataURL(file);
       });
+    },
+    drawOverlay(image) {
+      this.imageWidth = image.width;
+      this.imageHeight = image.height;
+      this.imageRatio = image.width / image.height;
+      let offsetX = 0;
+      let offsetY = 0;
+      let scaledWidth = this.previewWidth;
+      let scaledHeight = this.previewHeight;
+      const previewRatio = this.previewWidth / this.previewHeight;
+      if (this.crop) {
+        if (this.imageRatio >= previewRatio) {
+          scaledWidth = scaledHeight * this.imageRatio;
+          offsetX = (this.previewWidth - scaledWidth) / 2;
+        } else {
+          scaledHeight = scaledWidth / this.imageRatio;
+          offsetY = (this.previewHeight - scaledHeight) / 2;
+        }
+      } else {
+        if (this.imageRatio >= previewRatio) {
+          scaledHeight = scaledWidth / this.imageRatio;
+          offsetY = (this.previewHeight - scaledHeight) / 2;
+        } else {
+          scaledWidth = scaledHeight * this.imageRatio;
+          offsetX = (this.previewWidth - scaledWidth) / 2;
+        }
+      }
+      const canvas = this.$refs.previewCanvas;
+
+      if (this.rotate) {
+        this.context.translate(
+          offsetX * this.pixelRatio,
+          offsetY * this.pixelRatio
+        );
+        this.context.translate(
+          (scaledWidth / 2) * this.pixelRatio,
+          (scaledHeight / 2) * this.pixelRatio
+        );
+        this.context.rotate(this.rotate);
+        offsetX = -scaledWidth / 2;
+        offsetY = -scaledHeight / 2;
+      }
+
+      this.context.beginPath();
+      this.context.lineWidth = "6";
+      this.context.strokeStyle = "red";
+      this.context.rect(
+        offsetX * this.pixelRatio,
+        offsetY * this.pixelRatio,
+        scaledWidth * this.pixelRatio,
+        scaledHeight * this.pixelRatio); 
+      this.context.stroke();
     },
     drawImage(image) {
       this.imageWidth = image.width;
@@ -413,7 +464,7 @@ export default {
       canvas.style.background = "none";
       canvas.width = this.previewWidth * this.pixelRatio;
       canvas.height = this.previewHeight * this.pixelRatio;
-      this.context.setTransform(1, 0, 0, 1, 0, 0);
+      // this.context.setTransform(1, 0, 0, 1, 0, 0);
       this.context.clearRect(0, 0, canvas.width, canvas.height);
       if (this.rotate) {
         this.context.translate(

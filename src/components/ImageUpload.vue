@@ -1,23 +1,20 @@
 <template>
     <div>
-    image: {{ hasImage }}
+        image: {{ hasImage }}
     <picture-upload
         ref="pictureInput"
         @change="onChanged"
         @remove="onRemoved"
         :width="500"
         :removable="true"
-        removeButtonClass="ui red button"
+        removeButtonClass="button is-danger"
         :height="500"
         accept="image/jpeg, image/png, image/gif"
-        buttonClass="ui button primary"
-        :customStrings="{
-            upload: '<h1>Upload it!</h1>',
-            drag: 'Click or drag an image here'
-        }"
->
-
-</picture-upload>
+        buttonClass="button is-info"
+        size="10MB"
+        :customStrings="customStrings"
+        :crop="false"
+    ></picture-upload>
 </div>
 </template>
 
@@ -35,6 +32,19 @@ import PictureUpload from '@/components/PictureInput/PictureInput.vue';
     },
 })
 export default class ImageUpload extends Vue {
+    private customStrings = {
+        upload: '<p>Your device does not support file uploading.</p>', // HTML allowed
+        drag: 'Drag an image or <br>click here to select a file', // HTML allowed
+        tap: 'Tap here to select a photo <br>from your gallery', // HTML allowed
+        change: 'Change Photo', // Text only
+        remove: 'Remove Photo', // Text only
+        select: 'Select a Photo', // Text only
+        selected: '<p>Photo successfully selected!</p>', // HTML allowed
+        fileSize: 'The file size exceeds the limit', // Text only
+        fileType: 'This file type is not supported.', // Text only
+        aspect: 'Landscape/Portrait', // Text only
+    };
+
     private storage = firebase.storage();
 
     private hasImage = false;
