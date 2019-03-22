@@ -13,6 +13,11 @@
           @drag.stop.prevent
           @dragover.stop.prevent
           @dragstart.stop.prevent="onDragStart"
+          @mousedown.stop.prevent="mouseDown"
+          @mouseup.stop.prevent="mouseUp"
+          @mouseenter.stop.prevent="mouseEnter"
+          @mouseLeave.stop.prevent="mouseLeave"
+          @mousemove.stop.prevent="mouseMove"
           @dragenter.stop.prevent="onDragStart"
           @dragend.stop.prevent="onDragStop"
           @dragleave.stop.prevent="onDragStop"
@@ -194,6 +199,15 @@ export default {
       draggingOver: false,
       canvasWidth: 0,
       canvasHeight: 0,
+
+      selectedOffsetY: 0,
+      selectedOffsetX: 0,
+      selectedOffsetWidth: 0,
+      selectedOffsetHeight: 0,
+
+      isMouseDown: false,
+      isMouseOver: false,
+
       strings: {
         upload: "<p>Your device does not support file uploading.</p>",
         drag: "Drag an image or <br>click here to select a file",
@@ -418,19 +432,11 @@ export default {
       this.context.beginPath();
       this.context.lineWidth = "6";
       this.context.strokeStyle = "red";
-      if(scaledHeight <= scaledWidth) {
-        this.context.rect(
-          offsetX * this.pixelRatio,
-          offsetY * this.pixelRatio,
-          scaledHeight * this.pixelRatio,
-          scaledHeight * this.pixelRatio);
-      } else {
-        this.context.rect(
-          offsetX * this.pixelRatio,
-          offsetY * this.pixelRatio,
-          scaledWidth * this.pixelRatio,
-          scaledWidth * this.pixelRatio);
-      }
+      this.context.rect(
+        this.selectedOffsetX,
+        this.selectedOffsetY,
+        this.selectedOffsetHeight,
+        this.selectedOffsetWidth);
       this.context.stroke();
     },
     drawImage(image) {
@@ -478,13 +484,47 @@ export default {
         offsetX = -scaledWidth / 2;
         offsetY = -scaledHeight / 2;
       }
+
+      offsetX *= this.pixelRatio;
+      offsetY *= this.pixelRatio;
+      scaledWidth *= this.pixelRatio;
+      scaledHeight *= this.pixelRatio;
+
+      this.selectedOffsetX = offsetX;
+      this.selectedOffsetY = offsetY;
+
+      if(scaledHeight <= scaledWidth) {
+        this.selectedOffsetHeight = scaledHeight;
+        this.selectedOffsetWidth = scaledHeight;
+      } else {          
+        this.selectedOffsetHeight = scaledWidth;
+        this.selectedOffsetWidth = scaledWidth;
+      }
+
       this.context.drawImage(
         image,
-        offsetX * this.pixelRatio,
-        offsetY * this.pixelRatio,
-        scaledWidth * this.pixelRatio,
-        scaledHeight * this.pixelRatio
+        offsetX,
+        offsetY,
+        scaledWidth,
+        scaledHeight
       );
+    },
+    mouseMove(event) {
+      if (this.isMouseDown) {
+        console.log(event);
+      }
+    },
+    mouseDown() {
+      this.isMouseDown = true;
+    },
+    mouseUp() {
+      this.isMouseDown = false;
+    },
+    mouseEnter() {
+      this.isMouseOver = true;
+    },
+    mouseLeave() {
+      this.isMouseOver = false;
     },
     selectImage() {
       this.$refs.fileInput.click();
