@@ -2,6 +2,9 @@
 
 # ultima
 
+A band site for a friend.
+Site has Spotify, Instagram, MailChimp, and firebase integrations.
+
 [ultima.band](https://ultima.band/)
 
 ## Project setup
