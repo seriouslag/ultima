@@ -56,13 +56,13 @@ export default class PictureInput extends Vue {
         minContainerWidth: 200,
         viewMode: 3,
         crop(event: any) {
-          console.log(event.detail.x);
-          console.log(event.detail.y);
-          console.log(event.detail.width);
-          console.log(event.detail.height);
-          console.log(event.detail.rotate);
-          console.log(event.detail.scaleX);
-          console.log(event.detail.scaleY);
+          // console.log(event.detail.x);
+          // console.log(event.detail.y);
+          // console.log(event.detail.width);
+          // console.log(event.detail.height);
+          // console.log(event.detail.rotate);
+          // console.log(event.detail.scaleX);
+          // console.log(event.detail.scaleY);
         },
       },
     );
@@ -84,6 +84,7 @@ export default class PictureInput extends Vue {
       ctx.save();
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, width, height);
+      console.log(image);
       ctx.drawImage(image, 0, 0);
       ctx.restore();
     });
@@ -114,9 +115,9 @@ export default class PictureInput extends Vue {
 
       const fileReader = new FileReader();
       fileReader.addEventListener('load',  async (e: any) => {
-          console.log(e.target.result);
           const orientation = await this.getOrientation(e.target.result as ArrayBuffer);
           const base64String = await this.arrayBufferToBase64(e.target.result as ArrayBuffer, ext);
+          console.log(base64String);
           this.resetOrientation(base64String, orientation, index++, this.drawImage);
       });
       fileReader.readAsArrayBuffer(file);
@@ -192,6 +193,8 @@ export default class PictureInput extends Vue {
         }
         // transform context before drawing image
         this.rotateCavasCtx(ctx, orientation, maxSize, maxSize);
+
+        console.log(img);
         // draw raw image
         ctx.drawImage(img, oXcenter, oYcenter, width, height);
         // export base64
