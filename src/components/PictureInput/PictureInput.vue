@@ -1,56 +1,15 @@
 <template>
   <div ref="container" id="picture-input" class="picture-input">
-    <canvas
+    <div class="canvasContainer">
+      <canvas
           ref="previewCanvas"
           class="picture-preview"
           :id="`id-${id}`"
+          width="500"
+          height="500"
         ></canvas>
-    <!-- <div v-if="!supportsUpload" v-html="strings.upload"></div>
-    <div v-else-if="supportsPreview">
-      <div
-        class="preview-container"
-        :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}"
-      >
-        
-        <div
-          v-if="!imageSelected && !plain"
-          class="picture-inner"
-          :style="{top: -previewHeight + 'px', marginBottom: -previewHeight + 'px', fontSize: fontSize, borderRadius: radius + '%', zIndex: zIndex + 2}"
-        >
-          <span v-if="supportsDragAndDrop" class="picture-inner-text" v-html="strings.drag"></span>
-          <span v-else class="picture-inner-text" v-html="strings.tap"></span>
-        </div>
-      </div>-->
-      <button
-        @click.prevent="selectImage"
-        class="buttonClass"
-      >select</button>
-      <!-- <button
-        v-if="imageSelected && toggleAspectRatio && width !== height"
-        @click.prevent="rotateImage"
-        :class="aspectButtonClass"
-      >{{ strings.aspect }}</button>
+        <!-- <img src="https://target.scene7.com/is/image/Target/GUEST_f5d0cfc3-9d02-4ee0-a6c6-ed5dc09971d1" ref="previewCanvas" id="banana" /> -->
     </div>
-    <div v-else>
-      <button
-        v-if="!imageSelected"
-        @click.prevent="selectImage"
-        :class="buttonClass"
-      >{{ strings.select }}</button>
-      <div v-else>
-        <div v-html="strings.selected"></div>
-        <button
-          v-if="!hideChangeButton"
-          @click.prevent="selectImage"
-          :class="buttonClass"
-        >{{ strings.change }}</button>
-        <button
-          v-if="removable"
-          @click.prevent="removeImage"
-          :class="removeButtonClass"
-        >{{ strings.remove }}</button>
-      </div>
-    </div> -->
     <input
       ref="fileInput"
       type="file"
@@ -65,50 +24,75 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import Cropper from 'cropperjs';
 import ImageUpload from '@/components/ImageUpload.vue';
 import { Event } from '@/models/Event';
-import { type } from 'os';
+
+import 'cropperjs/dist/cropper.min.css';
 
 @Component
 export default class PictureInput extends Vue {
   public $refs!: {
     previewCanvas: HTMLCanvasElement,
   };
-  private id = new Date().toString();
+  private id = new Date().getDate().toString();
   private canvas = this.$refs.previewCanvas;
   private imageSrc!: HTMLImageElement;
+  private banana = document.getElementById('banana') as HTMLImageElement;
 
   private cropper!: Cropper;
 
   private mounted() {
     this.canvas = this.$refs.previewCanvas;
-    this.cropper = new Cropper(this.canvas, {
-      aspectRatio: 16 / 9,
-      crop(event: any) {
-        console.log(event.detail.x);
-        console.log(event.detail.y);
-        console.log(event.detail.width);
-        console.log(event.detail.height);
-        console.log(event.detail.rotate);
-        console.log(event.detail.scaleX);
-        console.log(event.detail.scaleY);
-      },
-    });
+    console.log(this.banana, this.canvas);
   }
 
-  private drawImage() {
+  private showCropper() {
+    if (this.cropper) {
+      this.cropper.destroy();
+    }
+    this.cropper = new Cropper(
+      this.canvas, {
+        aspectRatio: 1 / 1,
+        autoCropArea: 1,
+        dragMode: 'move' as Cropper.DragMode,
+        minCanvasWidth: 500,
+        minCanvasHeight: 500,
+        minContainerHeight: 500,
+        minContainerWidth: 500,
+        viewMode: 3,
+        crop(event: any) {
+          // console.log(event.detail.x);
+          // console.log(event.detail.y);
+          // console.log(event.detail.width);
+          // console.log(event.detail.height);
+          // console.log(event.detail.rotate);
+          // console.log(event.detail.scaleX);
+          // console.log(event.detail.scaleY);
+        },
+      },
+    );
+  }
+
+  private drawImage(img: HTMLCanvasElement, index: number) {
     const canvas = this.canvas;
     const width = canvas.width;
     const height = canvas.height;
     const ctx = canvas.getContext('2d');
-    const src = this.imageSrc;
+    // const src = this.imageSrc;
 
     if (!ctx) {
       return;
     }
-    ctx.save();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(src, 0, 0);
-    ctx.restore();
+
+    const image = new Image();
+    image.addEventListener('load', async (e) => {
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      console.log(image);
+      ctx.drawImage(image, 0, 0);
+      ctx.restore();
+      this.showCropper();
+    });
+    image.src = img.toDataURL();
   }
 
   private onFileChange(event: EventTarget) {
@@ -134,7 +118,13 @@ export default class PictureInput extends Vue {
       };
 
       const fileReader = new FileReader();
-      fileReader.addEventListener('load',  listener);
+      fileReader.addEventListener('load',  async (e: any) => {
+          const orientation = await this.getOrientation(e.target.result as ArrayBuffer);
+          const base64String = await this.arrayBufferToBase64(e.target.result as ArrayBuffer, ext);
+          console.log(base64String);
+          this.resetOrientation(base64String, orientation, index++, this.drawImage);
+      });
+      fileReader.readAsArrayBuffer(file);
     });
   }
 
@@ -158,27 +148,25 @@ export default class PictureInput extends Vue {
       srcBase64: string,
       orientation: number,
       index: number,
-      callback: () => void): void {
+      callback: (a: HTMLCanvasElement, b: number) => void): void {
+
       const img = new Image();
-      const listener: EventListenerOrEventListenerObject = {
-        handleEvent: (e: any) => {
-           this.handleImageLoad(e, img, orientation, index, callback);
-        },
-      };
-      this.imageSrc.addEventListener('load', listener);
-      this.imageSrc.src = srcBase64;
+      img.addEventListener('load', (e: any) => {
+          this.handleImageLoad(img, orientation, index, callback);
+      });
+      img.src = srcBase64;
+      console.log('src', srcBase64);
     }
     private handleImageLoad(
-      e: Event,
       img: HTMLImageElement,
       orientation: number,
       index: number,
-      callback: (a: string, b: number) => void,
+      callback: (a: HTMLCanvasElement, b: number) => void,
     ): Promise<void> {
       return new Promise((resolve) => {
         // Defines canvases max height/width
         // Should match the display size
-        const maxSize = 40;
+        const maxSize = 500;
         // uploaded image width/height
         let width = img.width;
         let height = img.height;
@@ -209,10 +197,12 @@ export default class PictureInput extends Vue {
         }
         // transform context before drawing image
         this.rotateCavasCtx(ctx, orientation, maxSize, maxSize);
+
+        console.log(img);
         // draw raw image
         ctx.drawImage(img, oXcenter, oYcenter, width, height);
         // export base64
-        callback(canvas.toDataURL(), index);
+        callback(canvas, index);
         resolve();
       });
     }
@@ -269,3 +259,16 @@ export default class PictureInput extends Vue {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.picture-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .canvasContainer {
+    max-width: 500px;
+  }
+}
+</style>
