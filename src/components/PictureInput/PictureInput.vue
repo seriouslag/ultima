@@ -1,19 +1,15 @@
 <template>
   <div ref="container" id="picture-input" class="picture-input">
-    <div>
+    <div class="canvasContainer">
       <canvas
           ref="previewCanvas"
           class="picture-preview"
           :id="`id-${id}`"
+          width="500"
+          height="500"
         ></canvas>
         <!-- <img src="https://target.scene7.com/is/image/Target/GUEST_f5d0cfc3-9d02-4ee0-a6c6-ed5dc09971d1" ref="previewCanvas" id="banana" /> -->
     </div>
-    <button
-      @click.prevent="selectImage"
-      class="buttonClass"
-    >
-      select
-    </button>
     <input
       ref="fileInput"
       type="file"
@@ -46,14 +42,21 @@ export default class PictureInput extends Vue {
   private mounted() {
     this.canvas = this.$refs.previewCanvas;
     console.log(this.banana, this.canvas);
+  }
+
+  private showCropper() {
+    if (this.cropper) {
+      this.cropper.destroy();
+    }
     this.cropper = new Cropper(
       this.canvas, {
         aspectRatio: 1 / 1,
+        autoCropArea: 1,
         dragMode: 'move' as Cropper.DragMode,
-        minCanvasWidth: 200,
-        minCanvasHeight: 200,
-        minContainerHeight: 200,
-        minContainerWidth: 200,
+        minCanvasWidth: 500,
+        minCanvasHeight: 500,
+        minContainerHeight: 500,
+        minContainerWidth: 500,
         viewMode: 3,
         crop(event: any) {
           // console.log(event.detail.x);
@@ -87,6 +90,7 @@ export default class PictureInput extends Vue {
       console.log(image);
       ctx.drawImage(image, 0, 0);
       ctx.restore();
+      this.showCropper();
     });
     image.src = img.toDataURL();
   }
@@ -148,12 +152,12 @@ export default class PictureInput extends Vue {
 
       const img = new Image();
       img.addEventListener('load', (e: any) => {
-          this.handleImageLoad(e, img, orientation, index, callback);
+          this.handleImageLoad(img, orientation, index, callback);
       });
       img.src = srcBase64;
+      console.log('src', srcBase64);
     }
     private handleImageLoad(
-      e: Event,
       img: HTMLImageElement,
       orientation: number,
       index: number,
@@ -162,7 +166,7 @@ export default class PictureInput extends Vue {
       return new Promise((resolve) => {
         // Defines canvases max height/width
         // Should match the display size
-        const maxSize = 40;
+        const maxSize = 500;
         // uploaded image width/height
         let width = img.width;
         let height = img.height;
@@ -256,6 +260,15 @@ export default class PictureInput extends Vue {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+.picture-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
+  .canvasContainer {
+    max-width: 500px;
+  }
+}
 </style>
