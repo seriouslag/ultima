@@ -13,7 +13,6 @@
     "@babel/polyfill": "^7.4.4",
     "bulma": "^0.7.4",
     "cropperjs": "^1.5.1",
-    "fibers": "^4.0.1",
     "firebase": "^5.9.0",
     "flatpickr": "^4.5.7",
     "register-service-worker": "^1.6.2",
