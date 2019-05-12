@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:4.8.2-jessie
     steps:
       - checkout
       - restore_cache:
