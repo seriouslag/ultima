@@ -3,7 +3,10 @@
   <h2 v-if="this.feed.length" class="title">Latest updates</h2>
   <div class="columns is-multiline is-centered">
     <div class="column" v-for="data in feed" :key="data.id">
-      <a href="https://www.instagram.com/ultimasynthwave/">
+      <a
+        href="https://www.instagram.com/ultimasynthwave/"
+        :class="{ 'is-vid': data.type === 'video' }"
+      >
         <figure class="image is-square" v-if="data.type === 'image' || data.type === 'carousel'">
           <img  :src="data.images.standard_resolution.url">
           <div class="insta-overlay">
@@ -87,6 +90,13 @@ export default class InstagramFeed extends Vue {
       max-width: 400px;
 
       a {
+        &.is-vid {
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          display: flex;
+        }
+
         figure {
           position: relative;
 
