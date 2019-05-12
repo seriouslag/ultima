@@ -45,13 +45,13 @@
       </div>
       <div
         class="columns"
-        v-if="errors.first('EMAIL')"
+        v-if="$validator.errors.first('EMAIL')"
       >
         <div
           class="column is-centered"
         >
           <p class="help is-danger">
-            {{ errors.first('EMAIL') }}
+            {{ $validator.errors.first('EMAIL') }}
           </p>
         </div>
       </div>

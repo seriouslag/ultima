@@ -24,7 +24,7 @@
                     >
                 </div>
                 <p class="help is-danger">
-                    {{ errors.first('name') }}
+                    {{ $validator.errors.first('name') }}
                 </p>
             </div>
             <div class="field">
@@ -39,7 +39,7 @@
                     >
                 </div>
                 <p class="help is-danger">
-                    {{ errors.first('imageUrl') }}
+                    {{ $validator.errors.first('imageUrl') }}
                 </p>
             </div>
             <div class="field">
@@ -53,7 +53,7 @@
                     ></textarea>
                 </div>
                 <p class="help is-danger">
-                    {{ errors.first('note') }}
+                    {{ $validator.errors.first('note') }}
                 </p>
             </div>
             <div class="field is-horizontal">
@@ -119,7 +119,7 @@
                             </span>
                         </p>
                         <p class="help is-danger">
-                            {{ errors.first('locationName') }}
+                            {{ $validator.errors.first('locationName') }}
                         </p>
                     </div>
                     <div class="field">
@@ -143,7 +143,7 @@
                             </span>
                         </p>
                         <p class="help is-danger">
-                            {{ errors.first('locationUrl') }}
+                            {{ $validator.errors.first('locationUrl') }}
                         </p>
                     </div>
                 </div>
@@ -218,7 +218,7 @@ export default class EventForm extends Vue {
   }
 
   get isInvalid() {
-      const isInvald = !!this.errors.items.length;
+      const isInvald = !!this.$validator.errors.items.length;
       this.emitIsInvalid(isInvald);
       return isInvald;
   }
