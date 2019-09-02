@@ -5,7 +5,7 @@
       aria-label="main navigation"
   >
     <div class="navbar-brand">
-      <slot name="logo"></slot>
+      <slot name="logo" />
       <a
         role="button"
         class="navbar-burger burger"
@@ -29,10 +29,10 @@
         :class="{ menu: isOpen }"
     >
       <div class="navbar-start">
-        <slot name="start"></slot>
+        <slot name="start" />
       </div>
       <div class="navbar-end">
-        <slot name="end"></slot>
+        <slot name="end" />
       </div>
     </div>
   </nav>
