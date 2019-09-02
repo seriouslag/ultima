@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="the-footer">
     Copyright © Ultima {{ year }}
   </footer>
 </template>
@@ -16,7 +16,7 @@ export default class TheFooter extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  footer {
+  .the-footer {
     background-color: #363636;
     color: whitesmoke;
   }
