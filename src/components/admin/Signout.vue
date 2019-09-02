@@ -2,6 +2,7 @@
     <a
         class="link navbar-item"
         @click="signout()"
+        tabindex="0"
     >
         Signout
     </a>

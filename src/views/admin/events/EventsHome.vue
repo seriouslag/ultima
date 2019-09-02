@@ -27,19 +27,20 @@
             <a
                 @click="confirmDelete(index)"
                 class="delete is-large has-background-danger"
+                tabindex="0"
+                :aria-label="`Delete event ${event.name}`"
             ></a>
           </p>
         </div>
       </div>
-      <confirm-modal v-model="deleteModal">
+      <confirm-modal v-model="deleteModal" v-if="selectedEventIndex >= 0">
           <span
             slot="header"
-            v-if="selectedEventIndex >= 0"
           >
               Delete event: {{ events[selectedEventIndex].name || events[selectedEventIndex].id }}
           </span>
           <p>
-              Are you sure you want to delete this event?
+              Are you sure you want to delete the event: {{ events[selectedEventIndex].name }}?
           </p>
           <button
             class="button is-danger"

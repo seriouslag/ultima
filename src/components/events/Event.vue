@@ -5,7 +5,13 @@
         <img :src="event.image">
       </p>
       <div class="event-link" v-if="event.where.url">
-        <a class="link is-info" :href="event.where.url">Link</a>
+        <a
+          class="link is-info"
+          :href="event.where.url"
+          :aria-label="`Link to ${event.where.url}`"
+        >
+          Link
+        </a>
       </div>
     </figure>
     <div class="media-content">
@@ -13,7 +19,7 @@
         <div>
           <strong>{{ event.name }}</strong>
           <br>
-          <small>{{event.when.toMillis() | toDate}}</small>
+          <small>{{ event.when.toMillis() | toDate }}</small>
           <br>
           <p>
             {{event.note}}
