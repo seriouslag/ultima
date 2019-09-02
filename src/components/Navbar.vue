@@ -52,16 +52,19 @@ export default class Navbar extends Vue {
   background-color: #a25387;
   color: black;
 
+  &:focus,&:hover,&:active {
+    background-color: #a25387;
+  }
+
   .navbar-item {
       padding: 1.5em;
   }
 
-  a,
-  button {
+  a,button {
     color: white;
 
     &.navbar-item {
-        &:hover {
+        &:hover, &:active, &:focus {
             background-color: rgba(36,36,36,0.5);
         }
     }
@@ -86,7 +89,6 @@ export default class Navbar extends Vue {
 
     span {
       user-select: none;
-      background-color: white;
     }
   }
 }

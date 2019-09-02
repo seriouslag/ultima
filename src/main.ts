@@ -5,7 +5,6 @@ import App from './App.vue';
 import { router } from './router';
 import store from './store';
 // import './registerServiceWorker';
-import 'bulma/css/bulma.css';
 import './styles/index.scss';
 import './plugins';
 import './filters';
