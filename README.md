@@ -3,7 +3,7 @@
 # ultima
 
 A band site for a friend.
-Site has Spotify, Instagram, MailChimp, and firebase integrations.
+Site has Spotify, Instagram, MailChimp, and firebase (auth, storage, firestore).
 
 [ultima.band](https://ultima.band/)
 
@@ -14,7 +14,7 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn start
 ```
 
 ### Compiles and minifies for production
