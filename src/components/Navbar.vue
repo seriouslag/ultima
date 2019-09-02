@@ -1,9 +1,9 @@
 <template>
-<nav
-    class="navbar"
-    role="navigation"
-    aria-label="main navigation"
->
+  <nav
+      class="navbar"
+      role="navigation"
+      aria-label="main navigation"
+  >
     <div class="navbar-brand">
       <slot name="logo"></slot>
       <a
