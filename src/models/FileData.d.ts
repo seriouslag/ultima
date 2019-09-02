@@ -19,12 +19,13 @@ interface ErrorText {
 }
 
 export class FileData {
-  public static fromRaw: (fileDataRaw: any, options: any) => Promise<any>;
-  public static fromRawArray: (filesDataRaw: any[], options: any) => Promise<any[]>;
-  public static toRawArray: (filesData: any) => any[];
-  public static readFile: (fileData: any) => Promise<any>;
-  public static readFiles: (filesData: any) => Promise<any[]>;
-  public raw: any;
+  public constructor(data: RawFileData, options: any);
+  public static fromRaw: (fileDataRaw: RawFileData, options: any) => Promise<FileData>;
+  public static fromRawArray: (filesDataRaw: RawFileData[], options: any) => Promise<FileData[]>;
+  public static toRawArray: (filesData: FileData[]) => RawFileData[];
+  public static readFile: (fileData: FileData) => Promise<FileData>;
+  public static readFiles: (filesData: FileData[]) => Promise<FileData[]>;
+  public raw: RawFileData;
   public url: null | string;
   public urlResized: null | string;
   public _progress: ProgressEvent | boolean;
@@ -45,13 +46,13 @@ export class FileData {
   public thumbnailSize: number;
   public upload: any;
   public videoThumbnail: any;
-  public populate: (data: any, options: any) => void;
+  public populate: (data: RawFileData, options: any) => void;
   public hasProgress: () => boolean;
   public progress: (value: undefined | number) => any | number;
   public size: () => number | '';
   public src: () => string;
   public ext: () => string;
-  public name: () => string;
+  public name: (withoutName?: boolean) => string;
   public isDarkColor: () => boolean;
   public color: () => string;
   public isImage: () => boolean;
@@ -65,8 +66,25 @@ export class FileData {
   public resizeImage: () => Promise<void>;
   public icon: () => any;
   public getErrorMessage: (errorText: string) => ErrorText;
-  public toRaw: () => any;
+  public toRaw: () => RawFileData;
   public validate: () => void;
 }
 
-export { Dimensions, Options };
+ interface RawFileData {
+  url: string|null;
+  urlResized: string|null;
+  src: () => any;
+  name: string;
+  lastModified: number;
+  sizeText: string;
+  size: number;
+  type: string;
+  ext: string;
+  color: string;
+  file: File;
+  progress: () => any;
+  error: boolean;
+  dimensions: Dimensions;
+}
+
+export { Dimensions, Options, RawFileData };

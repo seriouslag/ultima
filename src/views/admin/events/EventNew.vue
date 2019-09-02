@@ -22,7 +22,7 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 
 import { Event } from '@/models/Event';
-import { FileData } from '@/models/FileData';
+import { RawFileData } from '@/models/FileData';
 
 @Component({
     components: {
@@ -37,11 +37,11 @@ export default class EventNew extends Vue {
     private loading = false;
 
     private async createEvent(submitEvent: SubmitEvent) {
-        this.loading = true;
         console.log('creating new event', submitEvent);
         const { event, image } = submitEvent;
         let url: string|null = null;
         if (!this.isInvalid) {
+            this.loading = true;
             try {
                 // upload image to firebase
                 if (image) {
@@ -72,11 +72,21 @@ export default class EventNew extends Vue {
         }
     }
 
-    private uploadImageAndReturnUrl(image: FileData): Promise<string> {
-        return new Promise((resolve, reject) => {
-            const imgRef = this.storage.child(`events/${image.name}`);
+    private uploadImageAndReturnUrl(image: RawFileData): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            let imgRef = this.storage.child(`events/${image.name}`);
+            try {
+                const check = await imgRef.getDownloadURL();
+                // found image append random id to end of imgRed
+                const lastIndexOfExt = image.name.lastIndexOf(`.${image.ext}`);
+                const newName = `${image.name.substring(0, lastIndexOfExt)}-${this.getRandomInt(1, 9999)}.${image.ext}`;
+                imgRef = this.storage.child(`events/${newName}`);
+            } catch (e) {
+                console.log(e);
+                // do nothing?
+            }
             const uploadTask = imgRef.put(image.file, {
-                contentType: `image/${image.ext}`,
+                contentType: image.type,
             });
 
             uploadTask.on('state_changed', (snapshot) => {
@@ -103,6 +113,12 @@ export default class EventNew extends Vue {
                 }
             });
         });
+    }
+
+    private getRandomInt(min: number, max: number) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
     }
 
     private handleValidationChange(value: boolean) {

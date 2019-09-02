@@ -211,7 +211,7 @@ import Datepicker from '@/components/datepicker/index.vue';
 import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 
 import { Event } from '@/models/Event';
-import { FileData } from '@/models/FileData';
+import { RawFileData } from '@/models/FileData';
 
 @Component({
     components: {
@@ -245,7 +245,7 @@ export default class EventForm extends Vue {
       },
   } as Event;
 
-  private image: FileData|null = null;
+  private image: RawFileData|null = null;
 
   private localDate = new Date(this.localEvent.when.toDate ?
     this.localEvent.when.toDate() : this.getRoundedDate(new Date()),
@@ -297,7 +297,7 @@ export default class EventForm extends Vue {
 
 interface SubmitEvent {
     event: Event;
-    image: FileData|null;
+    image: RawFileData|null;
 }
 
 export { SubmitEvent };
