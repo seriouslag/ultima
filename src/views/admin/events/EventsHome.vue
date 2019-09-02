@@ -19,6 +19,7 @@
                     name: 'editEvent',
                     params: { id: event.id },
                 }"
+                :aria-label="`Edit event ${event.name}`"
             >
               Edit
             </router-link>
@@ -33,7 +34,10 @@
           </p>
         </div>
       </div>
-      <confirm-modal v-model="deleteModal" v-if="selectedEventIndex >= 0">
+      <confirm-modal v-model="deleteModal">
+        <template
+          v-if="selectedEventIndex >= 0"
+        >
           <span
             slot="header"
           >
@@ -49,6 +53,7 @@
           >
             Delete
           </button>
+        </template>
       </confirm-modal>
     </div>
 </template>

@@ -1,77 +1,79 @@
 <template>
-    <div>
-        image: {{ hasImage }}
-    <picture-upload
-        ref="pictureInput"
-        @change="onChanged"
-        @remove="onRemoved"
-        :width="500"
-        :removable="true"
-        removeButtonClass="button is-danger"
-        :height="500"
-        accept="image/jpeg, image/png, image/gif"
-        buttonClass="button is-info"
-        size="10MB"
-        :customStrings="customStrings"
-        :crop="false"
-    ></picture-upload>
+<div>
+    <vue-file-agent
+        v-model="filesData"
+        :multiple="true"
+        :deletable="true"
+        :accept="'image/*'"
+        :max-size="maxFileSize"
+        :max-files="maxFiles"
+        :help-text="'Choose images or zip files'"
+        :error-text="{
+            type: 'Invalid file type. Only images are allowed',
+            size: `Files should not exceed ${maxFileSize} in size`,
+            common: 'Invalid file',
+        }"
+        :meta="true"
+        @select="filesAdded($event)"
+        @delete="fileDeleted($event)"
+    />
 </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
 
-import firebase from 'firebase/app';
-import 'firebase/storage';
+import VueFileAgent from 'vue-file-agent';
+import { FileData } from '@/models/FileData';
+import 'vue-file-agent/dist/vue-file-agent.css';
 
-import PictureUpload from '@/components/PictureInput/PictureInput.vue';
+Vue.use(VueFileAgent);
 
-@Component({
-    components: {
-        PictureUpload,
-    },
-})
+@Component
 export default class ImageUpload extends Vue {
-    private customStrings = {
-        upload: '<p>Your device does not support file uploading.</p>', // HTML allowed
-        drag: 'Drag an image or <br>click here to select a file', // HTML allowed
-        tap: 'Tap here to select a photo <br>from your gallery', // HTML allowed
-        change: 'Change Photo', // Text only
-        remove: 'Remove Photo', // Text only
-        select: 'Select a Photo', // Text only
-        selected: '<p>Photo successfully selected!</p>', // HTML allowed
-        fileSize: 'The file size exceeds the limit', // Text only
-        fileType: 'This file type is not supported.', // Text only
-        aspect: 'Landscape/Portrait', // Text only
-    };
+    @Prop()
+    private value!: FileData|null;
 
-    private storage = firebase.storage();
+    private filesData: FileData[] = [];
+    private maxFiles = 1;
+    private maxFileSize = '10MB';
+    private filesDataForUpload: FileData[] = [];
 
-    private hasImage = false;
-    private file: string = '';
-
-    private dropzoneOptions = {
-        thumbnailWidth: 150,
-        maxFilesize: 4,
-        addRemoveLinks: true,
-        uploadMultiple: false,
-        autoProcessQueue: false,
-    };
-
-    private onChanged(file: string) {
-        if (file) {
-            this.hasImage = true;
-            this.file = file;
-        } else {
-            this.hasImage = false;
-            this.file = '';
+    private created() {
+        if (this.value) {
+            this.filesDataForUpload = [this.value];
+            this.filesData = [this.value];
         }
     }
 
-    private onRemoved() {
-        this.hasImage = false;
+    private filesAdded(filesDataNewlySelected: any) {
+      const validFilesData = filesDataNewlySelected.filter((fileData: FileData) => !fileData.error);
+      this.filesDataForUpload = this.filesDataForUpload.concat(validFilesData);
     }
 
+    private fileDeleted(deletedData: FileData) {
+      this.filesDataForUpload.some((data: FileData, index: number) => {
+          if (deletedData === data) {
+            this.filesDataForUpload.splice(index, 1);
+            return true;
+          }
+          return false;
+      });
+    }
+
+    get hasImage(): boolean {
+      return !!this.filesDataForUpload.length;
+    }
+
+    @Watch('filesDataForUpload')
+    private fileWatcher(newVal: FileData[]) {
+        this.inputEmitter();
+    }
+
+    @Emit('input')
+    private inputEmitter(): FileData|null {
+        return this.filesDataForUpload[0] || null;
+    }
 }
 </script>
 

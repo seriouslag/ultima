@@ -10,8 +10,29 @@
         </div>
         <form
             @submit.prevent="emitSubmit"
+            :disabled="disabled"
         >
-            <image-upload />
+            <image-upload
+                v-model="image"
+                v-if="!localEvent.image"
+            />
+            <div v-else>
+                <div class="is-full">
+                    <img
+                        :src="localEvent.image"
+                    />
+                </div>
+                <div>
+                    <button
+                        class="button is-danger"
+                        @click="confirmDelete"
+                        type="button"
+                        :disabled="disabled"
+                    >
+                        Delete image
+                    </button>
+                </div>
+            </div>
             <div class="field">
                 <div class="control">
                     <input
@@ -27,7 +48,7 @@
                     {{ $validator.errors.first('name') }}
                 </p>
             </div>
-            <div class="field">
+            <!-- <div class="field">
                 <div class="control">
                     <input
                         class="input"
@@ -41,7 +62,7 @@
                 <p class="help is-danger">
                     {{ $validator.errors.first('imageUrl') }}
                 </p>
-            </div>
+            </div> -->
             <div class="field">
                 <div class="control">
                     <textarea
@@ -152,13 +173,34 @@
                 <button
                     class="button is-primary"
                     type="submit"
-                    :disabled="isInvalid"
+                    :disabled="isInvalid || disabled"
                 >
                     Save
                 </button>
                 <slot name="buttons" />
             </div>
         </form>
+        <confirm-modal
+            v-model="deleteModal"
+        >
+            <span
+                slot="header"
+            >
+                Delete image?
+            </span>
+            <p>
+                Are you sure you want to delete this image?
+            </p>
+            <button
+                class="button is-danger"
+                @click="deleteImage"
+                slot="confirm"
+                type="button"
+                :disabled="disabled"
+            >
+                Delete
+            </button>
+        </confirm-modal>
     </section>
 </template>
 
@@ -166,13 +208,16 @@
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
 import ImageUpload from '@/components/ImageUpload.vue';
 import Datepicker from '@/components/datepicker/index.vue';
+import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 
 import { Event } from '@/models/Event';
+import { FileData } from '@/models/FileData';
 
 @Component({
     components: {
         Datepicker,
         ImageUpload,
+        ConfirmModal,
     },
 })
 export default class EventForm extends Vue {
@@ -180,6 +225,14 @@ export default class EventForm extends Vue {
       required: false,
   })
   private event!: any;
+
+  @Prop({
+      required: false,
+      default: false,
+  })
+  private disabled!: boolean;
+
+  private deleteModal = false;
 
   private localEvent = this.event || {
       name: '',
@@ -192,6 +245,8 @@ export default class EventForm extends Vue {
       },
   } as Event;
 
+  private image: FileData|null = null;
+
   private localDate = new Date(this.localEvent.when.toDate ?
     this.localEvent.when.toDate() : this.getRoundedDate(new Date()),
   );
@@ -203,11 +258,27 @@ export default class EventForm extends Vue {
     return new Date(Math.ceil(date.getTime() / coeff) * coeff);
   }
 
+  private deleteImage() {
+      this.localEvent.image = '';
+      // if firebase url. delete image from firebase
+      this.deleteModal = false;
+  }
+
+  private confirmDelete() {
+      this.deleteModal = true;
+  }
+
   @Emit('submit')
   private async emitSubmit() {
       await this.$validator.validate();
       if (!this.isInvalid) {
-        const obj = { ...this.localEvent, when: new Date(`${this.date} ${this.time}`) };
+        const obj: SubmitEvent = {
+            event: {
+                ...this.localEvent,
+                when: new Date(`${this.date} ${this.time}`),
+            },
+            image: !!this.image ? this.image : null,
+        };
         return obj;
       }
   }
@@ -223,4 +294,12 @@ export default class EventForm extends Vue {
       return isInvald;
   }
 }
+
+interface SubmitEvent {
+    event: Event;
+    image: FileData|null;
+}
+
+export { SubmitEvent };
+
 </script>
