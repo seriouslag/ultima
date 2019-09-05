@@ -12,6 +12,13 @@
 </div>
 </template>
 
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component
+export default class SpotifyEmbed extends Vue {}
+</script>
+
 <style lang="scss" scoped>
   .spotifyEmbed {
     max-height: 100px;
