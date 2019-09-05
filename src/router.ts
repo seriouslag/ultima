@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/admin',
     component: () =>
-      import(/* webpackChunkName: "admin" */ './views/admin/Admin.vue'),
+      import('./views/admin/Admin.vue'),
     meta: {
       admin: true,
     },
@@ -26,7 +26,7 @@ const routes = [
         path: '/',
         name: 'admin',
         component: () =>
-          import(/* webpackChunkName: "adminHome" */ './views/admin/AdminHome.vue'),
+          import('./views/admin/AdminHome.vue'),
         meta: {
           admin: true,
         },
@@ -37,13 +37,13 @@ const routes = [
           admin: true,
         },
         component: () =>
-          import(/* webpackChunkName: "events" */ './views/admin/events/Events.vue'),
+          import('./views/admin/events/Events.vue'),
         children: [
           {
             name: 'adminEvents',
             path: '/',
             component: () =>
-              import(/* webpackChunkName: "eventsHome" */ './views/admin/events/EventsHome.vue'),
+              import('./views/admin/events/EventsHome.vue'),
             meta: {
               admin: true,
             },
@@ -52,7 +52,7 @@ const routes = [
             name: 'newEvent',
             path: 'new',
             component: () =>
-              import(/* webpackChunkName: "eventNew" */ './views/admin/events/EventNew.vue'),
+              import('./views/admin/events/EventNew.vue'),
             meta: {
               admin: true,
             },
@@ -61,7 +61,7 @@ const routes = [
             name: 'editEvent',
             path: 'edit/:id',
             component: () =>
-              import(/* webpackChunkName: "eventEdit" */ './views/admin/events/EventEdit.vue'),
+              import('./views/admin/events/EventEdit.vue'),
             meta: {
               admin: true,
             },
@@ -72,13 +72,13 @@ const routes = [
         path: 'login',
         name: 'login',
         component: () =>
-          import(/* webpackChunkName: "login" */ './views/admin/LoginView.vue'),
+          import('./views/admin/LoginView.vue'),
       },
       {
         path: 'unauthorized',
         name: 'unauthorized',
         component: () =>
-          import(/* webpackChunkName: "unauthorized" */ './views/admin/Unauthorized.vue'),
+          import('./views/admin/Unauthorized.vue'),
         beforeEnter: (to: any, from: any, next: any) => {
           if (
             store.getters.role &&

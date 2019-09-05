@@ -9,14 +9,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Intro from '@/components/home/Intro.vue';
-import About from '@/components/home/About.vue';
-import MailingList from '@/components/forms/MailingList.vue';
+
 
 @Component({
   components: {
     Intro,
-    About,
-    MailingList,
+    About: () => import(/* webpackPrefetch: true */ '@/components/home/About.vue'),
+    MailingList: () => import(/* webpackPrefetch: true */ '@/components/forms/MailingList.vue'),
   },
 })
 export default class Home extends Vue {}
