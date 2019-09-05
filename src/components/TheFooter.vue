@@ -17,6 +17,7 @@ export default class TheFooter extends Vue {
 
 <style lang="scss" scoped>
   .the-footer {
+    padding: 1em;
     background-color: #363636;
     color: whitesmoke;
   }
