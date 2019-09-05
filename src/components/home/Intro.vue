@@ -4,14 +4,16 @@
   <overlay />
   <div class="container is-centered is-vcentered wrapper">
     <h1>
-      <svg viewBox="0 0 60 18">
+      <svg viewBox="0 0 60 18" alt="Ultima">
         <defs>
           <linearGradient id="ultima" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse" >
             <stop stop-color="#f1d4f5" offset="0%"/>
             <stop stop-color="#a25387" offset="100%"/> 
           </linearGradient>
         </defs>
-        <text fill="url(#ultima)" style="font-family: 'Cyberpunk';" x="0" y="15" class="b">ULTIMA</text>
+        <text fill="url(#ultima)" style="font-family: 'Cyberpunk';" x="0" y="15" class="b">
+          ULTIMA
+        </text>
       </svg>
     </h1>
     <social-links />
