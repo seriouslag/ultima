@@ -1,3 +1,4 @@
+$primary: #a25387;
 $navbar-item-hover-background-color: rgba(36,36,36,0.5);
 @import '~bulma/bulma';
 
@@ -17,16 +18,16 @@ $navbar-item-hover-background-color: rgba(36,36,36,0.5);
 
 input, .input {
   &:active, &:focus {
-    border: 1px solid #a25387;
+    border: 1px solid $primary;
     box-shadow: 0 0 0 0.125em rgba(162, 83, 135, 0.25)
   }
 }
 
 a {
-  color: #a25387;
+  color: $primary;
 
   &:visited {
-    color: #a25387;
+    color: $primary;
   }
 
   &:hover, &:active {
