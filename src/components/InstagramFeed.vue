@@ -1,14 +1,14 @@
 <template>
 <div class="instagram-feed">
-  <h2 v-if="this.feed.length" class="title">Latest updates</h2>
-  <div class="columns is-multiline is-centered">
+  <h2 v-if="hasFeed" class="title">Latest updates</h2>
+  <div class="columns is-multiline is-centered" v-if="hasFeed">
     <div class="column" v-for="data in feed" :key="data.id">
       <a
         href="https://www.instagram.com/ultimasynthwave/"
         :class="{ 'is-vid': data.type === 'video' }"
       >
         <figure class="image is-square" v-if="data.type === 'image' || data.type === 'carousel'">
-          <img  :src="data.images.standard_resolution.url">
+          <img :src="data.images.standard_resolution.url">
           <div class="insta-overlay">
             <div>
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@ export default class InstagramFeed extends Vue {
   private feed: InstagramData[] = [];
 
   private instaUrl = 'https://api.instagram.com/v1/users/1271829278/media/recent';
-  private instaQuery = '?access_token=1271829278.8987fde.fc451720eb884fd0b76f6a1b72253d71&count=8';
+  private instaQuery = '?access_token=1271829278.0cd3290.245ad4abf3154d5a96dd49987d64e890&count=8';
 
   private mounted() {
     if (!this.feed.length) {
@@ -69,6 +69,10 @@ export default class InstagramFeed extends Vue {
     }
 
     this.emitShow();
+  }
+
+  get hasFeed(): boolean {
+    return !!this.feed && !!this.feed.length;
   }
 
   @Emit('show')
