@@ -6,6 +6,9 @@ jobs:
       - image: circleci/python:3.8.0rc1
     steps:
       - checkout
+      - run: 
+          name: Install yarn
+          command: npm install yarn
       - restore_cache:
           name: Restore Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
