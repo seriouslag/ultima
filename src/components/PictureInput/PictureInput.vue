@@ -13,7 +13,6 @@
     <input
       ref="fileInput"
       type="file"
-      @change="onFileChange"
     >
   </div>
 </template>
@@ -32,7 +31,7 @@ export default class PictureInput extends Vue {
   public $refs!: {
     previewCanvas: HTMLCanvasElement,
   };
-//   private id = new Date().getDate().toString();
+  private id = new Date().getDate().toString();
 //   private canvas = this.$refs.previewCanvas;
 //   private imageSrc!: HTMLImageElement;
 //   private banana = document.getElementById('banana') as HTMLImageElement;

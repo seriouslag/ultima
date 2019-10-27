@@ -108,7 +108,7 @@ export default class Login extends Vue {
 
 <style lang="scss" scoped>
 input, .input {
-  max-width: 600px;
+  max-width: 37.5em;
   min-width: 25vw;
 }
 </style>

@@ -8,7 +8,7 @@
         :class="{ 'is-vid': data.type === 'video' }"
       >
         <figure class="image is-square" v-if="data.type === 'image' || data.type === 'carousel'">
-          <img :src="data.images.standard_resolution.url">
+          <img :src="data.images.low_resolution.url">
           <div class="insta-overlay">
             <div>
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -25,8 +25,8 @@
           </div>
         </figure>
         <figure class="is-square" v-if="data.type === 'video'">
-          <video :width="data.videos.standard_resolution.width" controls>
-            <source :src="data.videos.standard_resolution.url" type="video/mp4">
+          <video :width="data.videos.low_resolution.width" controls>
+            <source :src="data.videos.low_resolution.url" type="video/mp4">
             Not Available
           </video>
         </figure>
@@ -72,12 +72,12 @@ export default class InstagramFeed extends Vue {
   }
 
   get hasFeed(): boolean {
-    return !!this.feed && !!this.feed.length;
+    return !!this.feed?.length;
   }
 
   @Emit('show')
   private emitShow() {
-    return !!this.feed.length;
+    return this.hasFeed;
   }
 }
 </script>

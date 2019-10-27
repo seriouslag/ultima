@@ -8,6 +8,7 @@
       frameborder="0"
       style="border:none; overflow:hidden;"
       allowtransparency="true"
+      title="spotify widget"
     ></iframe>
 </div>
 </template>

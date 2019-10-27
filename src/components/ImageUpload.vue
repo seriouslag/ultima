@@ -72,7 +72,7 @@ export default class ImageUpload extends Vue {
 
     @Emit('input')
     private inputEmitter(): FileData|null {
-        return this.filesDataForUpload[0] || null;
+        return this.filesDataForUpload[0] ?? null;
     }
 }
 </script>

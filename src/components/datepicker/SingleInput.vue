@@ -6,6 +6,18 @@
 import BasicInput from './BasicInput';
 
 export default {
-  mixins: [BasicInput],
+  props: {
+    placeholder: {
+      type: String,
+      default: 'Pick date',
+    },
+    inputClass: {
+      type: [Object, Array],
+      default() {
+        return {};
+      },
+    },
+    value: String,
+  },
 };
 </script>

@@ -20,6 +20,20 @@ interface InstagramData {
   location: any;
   attribution: any;
   users_in_photo: InstagramUser[];
+  videos: InstagramVideos;
+}
+
+interface InstagramVideos {
+  standard_resolution: Resolution;
+  low_resolution: Resolution;
+  low_bandwidth: Resolution;
+}
+
+interface Resolution {
+  id: string;
+  width: string;
+  height: string;
+  url: string;
 }
 
 interface InstagramCaption {

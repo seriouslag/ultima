@@ -13,14 +13,24 @@ import WrapperInput from './WrapperInput';
 import Flatpickr from 'flatpickr';
 
 export default {
-  mixins: [BasicInput],
-
   props: {
     alignment: String,
     config: {
       type: Object,
       default: () => ({}),
     },
+    date: Object,
+    placeholder: {
+      type: String,
+      default: 'Pick date',
+    },
+    inputClass: {
+      type: [Object, Array],
+      default() {
+        return {};
+      },
+    },
+    wrap: String,
   },
 
   components: {

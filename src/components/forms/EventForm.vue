@@ -277,7 +277,7 @@ export default class EventForm extends Vue {
                 ...this.localEvent,
                 when: new Date(`${this.date} ${this.time}`),
             },
-            image: !!this.image ? this.image : null,
+            image: this.image ?? null,
         };
         return obj;
       }

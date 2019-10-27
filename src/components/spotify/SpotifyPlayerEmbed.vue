@@ -1,6 +1,14 @@
 <template>
 <div class="spotifyPlayerEmbed">
-    <iframe src="https://open.spotify.com/embed/album/5qm1cdeZd9BmUEFWg5N57b" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe
+      src="https://open.spotify.com/embed/album/5qm1cdeZd9BmUEFWg5N57b"
+      width="300"
+      height="300"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+      title="spotify player"
+    ></iframe>
 </div>
 </template>
 
