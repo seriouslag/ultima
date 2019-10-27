@@ -3,12 +3,9 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/python:3.8.0rc1
+      - image: circleci/python:3.8.0rc1-node
     steps:
       - checkout
-      - run: 
-          name: Install yarn
-          command: npm install yarn
       - restore_cache:
           name: Restore Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
