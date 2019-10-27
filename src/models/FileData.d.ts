@@ -74,7 +74,7 @@ export class FileData {
   url: string|null;
   urlResized: string|null;
   src: () => any;
-  name: string;
+  name: () => string;
   lastModified: number;
   sizeText: string;
   size: number;

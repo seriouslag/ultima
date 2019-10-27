@@ -74,12 +74,12 @@ export default class EventNew extends Vue {
 
     private uploadImageAndReturnUrl(image: RawFileData): Promise<string> {
         return new Promise(async (resolve, reject) => {
-            let imgRef = this.storage.child(`events/${image.name}`);
+            let imgRef = this.storage.child(`events/${image.name()}`);
             try {
                 const check = await imgRef.getDownloadURL();
                 // found image append random id to end of imgRed
-                const lastIndexOfExt = image.name.lastIndexOf(`.${image.ext}`);
-                const newName = `${image.name.substring(0, lastIndexOfExt)}-${this.getRandomInt(1, 9999)}.${image.ext}`;
+                const lastIndexOfExt = image.name().lastIndexOf(`.${image.ext}`);
+                const newName = `${image.name().substring(0, lastIndexOfExt)}-${this.getRandomInt(1, 9999)}.${image.ext}`;
                 imgRef = this.storage.child(`events/${newName}`);
             } catch (e) {
                 console.log(e);
