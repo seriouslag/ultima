@@ -2,7 +2,7 @@
   <article class="media" v-if="event">
     <figure class="media-left">
       <p class="image is-128px">
-        <img :src="event.image" :alt="event.name" loading="lazy">
+        <img :src="event.image" :alt="event.name" loading="lazy" width="128" height="128">
       </p>
       <div class="event-link" v-if="event.where.url">
         <a
