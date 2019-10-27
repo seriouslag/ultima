@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" tabindex="-1">
     <div>
       <div>
         <router-view/>
@@ -35,7 +35,6 @@ export default class App extends Vue {
   display: flex;
 
   div {
-    
     flex: 1 0 0%;
   }
   

@@ -3,11 +3,11 @@
     <div class="column">
       <spotify-embed />
       <spotify-player-embed />
-      <aside>
+      <aside aria-label="Upcoming scheduled events">
         <event-list v-show="showEvents" @show="showEvents = true" />
       </aside>
     </div>
-    <aside class="column" v-show="showRightColumn">
+    <aside class="column" v-show="showRightColumn" aria-label="Ultima Instagram's feed">
       <instagram-feed v-show="showRightColumn" @show="handleShowRightColumn" />
     </aside>
   </main>

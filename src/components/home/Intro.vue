@@ -1,9 +1,9 @@
 <template>
-<div class="intro" role="banner">
+<header class="intro">
   <div class="background"></div>
   <overlay />
   <div class="container is-centered is-vcentered wrapper">
-    <h1>
+    <h1 aria-label="Ultima">
       <svg viewBox="0 0 60 18" alt="Ultima">
         <defs>
           <linearGradient id="ultima" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse" >
@@ -18,7 +18,7 @@
     </h1>
     <social-links />
   </div>
-</div>
+</header>
 </template>
 
 <script lang="ts">

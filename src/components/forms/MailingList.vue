@@ -10,6 +10,7 @@
       class="validate"
       target="_blank"
       novalidate
+      aria-label="Mailing list signup form"
     >
       <div class="columns">
         <h2 class="column">Stay in touch</h2>
@@ -45,7 +46,7 @@
               </span>
             </div>
           </div>
-          <div id="mce-responses">
+          <div id="mce-responses" aria-live="assertive" aria-atomic="true">
             <div class="response" id="mce-error-response" style="display:none"></div>
             <div class="response" id="mce-success-response" style="display:none"></div>
           </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
