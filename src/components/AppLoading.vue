@@ -1,5 +1,5 @@
 <template>
-<div class="loading">
+<div class="loading" aria-busy="true" aria-live="polite" aria-label="Loading Ultima.com">
   <h1>
     <div>
       <div>
@@ -31,6 +31,15 @@
   </h1>
 </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class AppLoading extends Vue {
+}
+
+</script>
 
 <style lang="scss" scoped>
 .loading {

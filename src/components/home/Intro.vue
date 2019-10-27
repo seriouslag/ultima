@@ -1,5 +1,5 @@
 <template>
-<div class="intro">
+<div class="intro" role="banner">
   <div class="background"></div>
   <overlay />
   <div class="container is-centered is-vcentered wrapper">

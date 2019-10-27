@@ -1,6 +1,8 @@
 <template>
-  <div class="the-loading">
-    <slot />
+  <div class="the-loading" aria-busy="true" aria-live="polite" :aria-labelledby="id">
+    <div :id="id">
+      <slot />
+    </div>
     <div v-if="value" class="the-loading__overlay columns is-vcentered">
       <div class="column">
         <progress class="progress is-large is-info" max="100">100%</progress>
@@ -19,6 +21,10 @@ export default class Loading extends Vue {
     default: false,
   })
   private value!: boolean;
+
+  get id(): string {
+    return `id-${Math.random().toString()}`;
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@ interface Event {
     image: string;
     name: string;
     note: string;
-    when: Date;
+    when: any;
     where: EventLocation;
 }
 

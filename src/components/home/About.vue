@@ -1,16 +1,16 @@
 <template>
-<section class="about section columns">
+  <main class="about section columns">
     <div class="column">
       <spotify-embed />
       <spotify-player-embed />
-      <div class="section">
+      <aside>
         <event-list v-show="showEvents" @show="showEvents = true" />
-      </div>
+      </aside>
     </div>
-    <div class="column" v-show="showRightColumn">
+    <aside class="column" v-show="showRightColumn">
       <instagram-feed v-show="showRightColumn" @show="handleShowRightColumn" />
-    </div>
-</section>
+    </aside>
+  </main>
 </template>
 
 <script lang="ts">

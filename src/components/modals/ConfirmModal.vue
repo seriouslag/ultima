@@ -7,10 +7,10 @@
             <slot name="header"/>
         </div>
         <slot />
-          <div
+        <div
             slot="footer"
             class="buttons"
-          >
+        >
             <button
                 class="button is-info"
                 @click="cancel"
@@ -18,8 +18,8 @@
                 Cancel
             </button>
             <slot name="confirm" />
-          </div>
-      </modal>
+        </div>
+    </modal>
 </template>
 
 <script lang="ts">

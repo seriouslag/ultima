@@ -2,6 +2,10 @@
     <div
         :class="{ 'is-active': value }"
         class="modal"
+        :id="id"
+        :aria-labelledby="`${id}-header`"
+        :aria-describedby="`${id}-content`"
+        :role="role"
     >
         <div
             class="modal-background"
@@ -9,7 +13,7 @@
         ></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">
+                <p class="modal-card-title" :id="`${id}-header`">
                     <slot name="header" />
                 </p>
                 <button
@@ -20,7 +24,7 @@
                 >
                 </button>
             </header>
-            <section class="modal-card-body">
+            <section class="modal-card-body" :id="`${id}-content`">
                 <slot />
             </section>
             <footer class="modal-card-foot">
@@ -47,12 +51,26 @@ export default class Modal extends Vue {
     })
     private disableClose!: boolean;
 
+    @Prop({
+        required: false,
+        default: false,
+    })
+    private alert!: boolean;
+
     private handleBackdropClick() {
         if (this.disableClose) {
             return;
         }
 
         this.$emit('input', false);
+    }
+
+    get role(): string {
+        return this.alert ? 'alertdialog' : 'dialog';
+    }
+
+    get id(): string {
+        return `id-${Math.random().toString()}`;
     }
 }
 </script>

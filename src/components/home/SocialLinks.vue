@@ -1,4 +1,5 @@
 <template>
+<div role="navigation" aria-label="Social links">
   <ul class="socialLinks">
     <li>
       <a href="https://www.facebook.com/ULTIMASynthwave/" aria-label="Link to Ultima's Facebook page">
@@ -36,6 +37,7 @@
       </a>
     </li>
   </ul>
+</div>
 </template>
 
 <script lang='ts'>
