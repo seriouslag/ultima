@@ -4,7 +4,6 @@
       <div>
         <router-view/>
       </div>
-     
     </div>
      <the-footer />
   </div>
