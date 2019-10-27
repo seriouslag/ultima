@@ -20,6 +20,7 @@
                 <div class="is-full">
                     <img
                         :src="localEvent.image"
+                        alt="Event image"
                     />
                 </div>
                 <div>

@@ -9,7 +9,7 @@
           :class="{ 'is-vid': data.type === 'video' }"
         >
           <figure class="image is-square" v-if="data.type === 'image' || data.type === 'carousel'">
-            <img :src="data.images.low_resolution.url" :alt="`image from instagram with ${!!data.caption ? `caption of ${data.caption}.` : `no caption.`}`">
+            <img :src="data.images.low_resolution.url" :alt="`image from instagram with ${!!data.caption ? `caption of ${data.caption}.` : `no caption.`}`" loading="lazy">
             <div class="insta-overlay">
               <div>
                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
