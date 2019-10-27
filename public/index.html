@@ -8,10 +8,13 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="preload" href="/fonts/fonts.css" as="style">
     <link rel="stylesheet" href="/fonts/fonts.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet">
     <title>Ultima</title>
     <style>
+      @font-face {
+        font-family: 'Roboto';
+        font-display: auto;
+        src: local('Roboto'), url(https://fonts.googleapis.com/css?family=Roboto) format('woff2');
+      }
       html {
         overflow: hidden;
         overflow-y: hidden !important;
