@@ -1,5 +1,5 @@
 <template>
-<aside class="instagram-feed">
+<div class="instagram-feed">
   <template v-if="hasFeed">
     <h2 class="title" aria-label="Latest updates from instagram">Latest updates</h2>
     <div class="columns is-multiline is-centered">
@@ -38,7 +38,7 @@
       </div>
     </div>
   </template>
-</aside>
+</div>
 </template>
 
 <script lang="ts">

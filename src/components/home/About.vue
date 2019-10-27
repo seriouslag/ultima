@@ -1,13 +1,19 @@
 <template>
   <main class="about section columns">
     <div class="column">
-      <spotify-embed />
-      <spotify-player-embed />
-      <aside aria-label="Upcoming scheduled events">
+      <div class="area">
+        <section aria-label="Ultima spotify artist highlight">
+          <spotify-embed />
+        </section>
+        <section aria-label="Ultima spotify album player">
+          <spotify-player-embed />
+        </section>
+      </div>
+      <aside aria-label="Upcoming scheduled events" class="area">
         <event-list v-show="showEvents" @show="showEvents = true" />
       </aside>
     </div>
-    <aside class="column" v-show="showRightColumn" aria-label="Ultima Instagram's feed">
+    <aside class="column area" v-show="showRightColumn" aria-label="Ultima Instagram's feed">
       <instagram-feed v-show="showRightColumn" @show="handleShowRightColumn" />
     </aside>
   </main>

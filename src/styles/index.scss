@@ -1,8 +1,10 @@
+@charset "utf-8";
+
 $primary: #a25387;
 $navbar-item-hover-background-color: rgba(36,36,36,0.5);
 @import '~bulma/bulma';
 
-* {
+body {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -33,4 +35,14 @@ a {
   &:hover, &:active {
     color: #234099;
   }
+}
+
+.column {
+  > :first-child {
+    margin: 0;
+  }
+}
+
+.area {
+  margin: 1em .5em;
 }
