@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node
+      - image: circleci/python:3.8.0rc1
     steps:
       - checkout
       - restore_cache:
