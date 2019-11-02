@@ -22,7 +22,7 @@
         :to="{ name: 'adminEvents' }"
         v-if="isAdmin"
       >
-        Event
+        Events
       </router-link>
       <router-link
         slot="start"
