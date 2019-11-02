@@ -1,13 +1,16 @@
-import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import 'whatwg-fetch';
 import Vue from 'vue';
 import App from './App.vue';
 import { router } from './router';
 import store from './store';
 // import './registerServiceWorker';
-import './styles/index.scss';
 import './plugins';
 import './filters';
+
+import './styles/bulma.scss';
+import './styles/index.scss';
 
 Vue.config.productionTip = false;
 

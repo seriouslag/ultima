@@ -1,8 +1,6 @@
 @charset "utf-8";
 
-$primary: #a25387;
-$navbar-item-hover-background-color: rgba(36,36,36,0.5);
-@import '~bulma/bulma';
+@import './colors';
 
 body {
   font-family: 'Roboto', sans-serif;
