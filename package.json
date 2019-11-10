@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "bulma": "^0.8.0",
-    "core-js": "^3.3.6",
-    "firebase": "^7.2.2",
+    "core-js": "^3.4.0",
+    "firebase": "^7.3.0",
     "flatpickr": "^4.6.3",
     "regenerator-runtime": "^0.13.3",
     "register-service-worker": "^1.6.2",
@@ -29,19 +29,19 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.1",
+    "@types/dotenv": "^8.2.0",
     "@vue/cli-plugin-pwa": "^4.0.5",
     "@vue/cli-plugin-typescript": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
     "@vue/cli-plugin-babel": "^4.0.5",
     "colors": "^1.4.0",
-    "firebase-tools": "^7.6.2",
+    "firebase-tools": "^7.7.0",
     "lint-staged": "^9.4.2",
     "sass": "1.23.3",
     "sass-loader": "^8.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "tslint": "^5.20.0",
+    "tslint": "^5.20.1",
     "typescript": "^3.8.0-dev.20191026",
     "vue-template-compiler": "^2.6.10"
   },
