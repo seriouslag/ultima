@@ -21,13 +21,17 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import SpotifyEmbed from '@/components/spotify/SpotifyEmbed.vue';
+import SpotifyPlayerEmbed from '@/components/spotify/SpotifyPlayerEmbed.vue';
+import InstagramFeed from '@/components/InstagramFeed.vue';
+import EventList from '@/components/events/EventList.vue';
 
 @Component({
   components: {
-    SpotifyEmbed: () => import(/* webpackPrefetch: true */ '@/components/spotify/SpotifyEmbed.vue'),
-    SpotifyPlayerEmbed: () => import(/* webpackPrefetch: true */ '@/components/spotify/SpotifyPlayerEmbed.vue'),
-    InstagramFeed: () => import(/* webpackPrefetch: true */ '@/components/InstagramFeed.vue'),
-    EventList: () => import(/* webpackPrefetch: true */ '@/components/events/EventList.vue'),
+    SpotifyEmbed,
+    SpotifyPlayerEmbed,
+    InstagramFeed,
+    EventList,
   },
 })
 export default class About extends Vue {
