@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-edit">
     <loading v-model="loading">
       <h3 class="title is-3">Edit Event</h3>
       <event-form
@@ -210,3 +210,11 @@ export default class EventEdit extends Vue {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.event-edit {
+    @media (min-width:801px) {
+       padding-bottom: 3em;
+   }
+}
+</style>

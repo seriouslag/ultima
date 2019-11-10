@@ -3,21 +3,26 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+interface UltimaState {
+  role: string|null;
+  user: any|null;
+}
+
 export default new Vuex.Store({
   state: {
     role: null,
     user: null,
   },
   getters: {
-    role: (state) => state.role,
-    user: (state) => state.user,
+    role: (state: UltimaState) => state.role,
+    user: (state: UltimaState) => state.user,
   },
   mutations: {
-    setRole: (state, role) => state.role = role,
-    setUser: (state, user) => state.user = user,
+    setRole: (state: UltimaState, role: any|null) => state.role = role,
+    setUser: (state: UltimaState, user: any|null) => state.user = user,
   },
   actions: {
-    setRole: ({ commit }, role) => commit('setRole', role),
-    setUser: ({ commit }, user) => commit('setUser', user),
+    setRole: ({ commit }: any, role: string|null) => commit('setRole', role),
+    setUser: ({ commit }: any, user: any|null) => commit('setUser', user),
   },
 });

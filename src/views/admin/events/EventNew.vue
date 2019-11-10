@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="event-new">
         <loading
             v-model="loading"
         >
@@ -127,3 +127,10 @@ export default class EventNew extends Vue {
 }
 </script>
 
+<style lang="scss" scoped>
+.event-new {
+   @media (min-width:801px) {
+       padding-bottom: 3em;
+   }
+}
+</style>

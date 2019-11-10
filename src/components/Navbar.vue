@@ -6,12 +6,11 @@
   >
     <div class="navbar-brand">
       <slot name="logo" />
-      <a
+      <a @click="isOpen = !isOpen"
         role="button"
         class="navbar-burger burger"
         aria-label="menu"
         aria-expanded="false"
-        @click="isOpen = !isOpen"
       >
         <span aria-hidden="true" :style="{ display: isOpen ? 'none' : 'block' }"></span>
         <span aria-hidden="true" :style="{ display: isOpen ? 'none' : 'block' }"></span>

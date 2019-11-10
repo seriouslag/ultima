@@ -208,7 +208,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
 import ImageUpload from '@/components/ImageUpload.vue';
-import Datepicker from '@/components/datepicker/index.vue';
+import Datepicker from '@/components/datepicker/Datepicker.vue';
 import ConfirmModal from '@/components/modals/ConfirmModal.vue';
 
 import { Event } from '@/models/Event';
