@@ -1,0 +1,33 @@
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "eslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    {
+      "autoFix": true,
+      "language": "typescript"
+    },
+    {
+      "autoFix": true,
+      "language": "typescriptreact"
+    },
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "vetur.useWorkspaceDependencies": true,
+  "vetur.completion.autoImport": true,
+  "vetur.completion.tagCasing": "kebab",
+  "vetur.validation.script": true,
+  "vetur.validation.style": true,
+  "vetur.validation.template": true,
+  "vetur.format.scriptInitialIndent": false,
+  "vetur.format.options.tabSize": 2,
+  "vetur.format.options.useTabs": false
+}
