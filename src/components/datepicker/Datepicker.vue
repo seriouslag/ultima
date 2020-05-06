@@ -1,7 +1,11 @@
 <template>
-  <component :value="date" :placeholder="placeholder" 
-    :inputClass="inputClass" :alignment="alignment" 
-    :is="wrap ? 'WrapperInput' : 'SingleInput'">
+  <component
+    :value="date"
+    :placeholder="placeholder" 
+    :inputClass="inputClass"
+    :alignment="alignment" 
+    :is="wrap ? 'WrapperInput' : 'SingleInput'"
+  >
     <slot></slot>
   </component>
 </template>
@@ -12,6 +16,8 @@ import WrapperInput from './WrapperInput.vue';
 import Flatpickr from 'flatpickr';
 
 import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Instance } from 'flatpickr/dist/types/instance';
+import { BaseOptions, DateOption } from 'flatpickr/dist/types/options';
 
 @Component({
   components: {
@@ -24,58 +30,47 @@ export default class Datepicker extends Vue {
     type: Object,
     default: () => ({}),
   })
-  private config!: any;
+  private config!: Partial<BaseOptions>;
 
   @Prop({
     type: String,
   })
-  private alignment!: string;
-
-  // @Prop({
-  //   type: Object,
-  // })
-  // private date!: any;
+  public alignment!: string;
 
   @Prop({
     type: String,
     default: 'Pick date',
   })
-  private placeholder!: string;
+  public placeholder!: string;
 
   @Prop({
     type: [Object, Array],
     default: () => ({}),
   })
-  private inputClass!: any;
-
-  // @Prop({
-  //   type: String,
-  // })
-  // private wrap!: string;
-
-  private datepicker: any = null;
-  private selectedDates: any = null;
+  public inputClass!: Object|Array<any>;
 
   @Prop()
-  private value!: any;
+  private value!: string;
 
-  private mounted() {
+  private datepicker: Instance|null = null;
+  private selectedDates: string|null = null;
+
+  public mounted() {
     if (!this.datepicker) {
       this.config.onValueUpdate = this.dateUpdated;
-      this.datepicker = Flatpickr(this.$el, this.config);
-      console.log(this.config);
-      this.setDate(this.value, null);
+      this.datepicker = Flatpickr(this.$el, this.config); 
+      this.setDate(this.value);
     }
   }
 
   @Watch('config')
-  private configWatcher(newConfig: any) {
+  public configWatcher(newConfig: Partial<BaseOptions>) {
     this.redraw(newConfig);
   }
 
   @Watch('value')
-  private valueWatcher(newValue: any, oldValue: any) {
-    this.setDate(newValue, oldValue);
+  public valueWatcher(newValue: string) {
+    this.setDate(newValue);
   }
 
   private beforeDestroy() {
@@ -85,39 +80,40 @@ export default class Datepicker extends Vue {
     }
   }
 
-  private redraw(newConfig: any) {
+  private redraw(newConfig: Partial<BaseOptions>): void {
+    if (!this.datepicker) return;
     this.datepicker.config = Object.assign(this.datepicker.config, newConfig);
     this.datepicker.redraw();
     this.datepicker.jumpToDate();
   }
 
-  private setDate(newDate: any, oldDate: any) {
-    if (newDate) {
+  private setDate(newDate: string|number|Date|DateOption[]) {
+    if (newDate && this.datepicker) {
       this.datepicker.setDate(newDate);
     }
   }
 
-  private dateUpdated(selectedDates: any, dateStr: any) {
-    this.date = dateStr;
+  private dateUpdated(selectedDates: Date[], currentDateString: string) {
+    this.date = currentDateString;
   }
 
-  get wrap() {
+  public get wrap(): boolean {
     return !!this.config.wrap;
   }
 
-  get static() {
+  private get static(): boolean {
     return !!this.config.static;
   }
 
-  get name() {
+  private get name(): 'wrapperInput'|'singleInput' {
     return this.wrap ? 'wrapperInput' : 'singleInput';
   }
 
-  get date() {
+  public get date(): string {
     return this.selectedDates || this.value;
   }
 
-  set date(newValue: any) {
+  public set date(newValue: string) {
     if (this.selectedDates !== newValue) {
       this.selectedDates = newValue;
       this.inputEmitter(newValue);
@@ -125,7 +121,7 @@ export default class Datepicker extends Vue {
   }
 
   @Emit('input')
-  private inputEmitter(value: any) {
+  private inputEmitter(value: string) {
     return value;
   }
 
